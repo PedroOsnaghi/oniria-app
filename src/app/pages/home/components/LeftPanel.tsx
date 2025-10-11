@@ -57,7 +57,7 @@ export default function LeftPanel({
   };
 
   return (
-    <Card className="col-span-12 md:col-span-3 min-w-[300px] p-6 h-[88vh] overflow-y-auto text-[15px] space-y-4">
+    <Card className="col-span-12 md:col-span-3 min-w-[300px] p-6 h-[88vh] overflow-hidden text-[15px] space-y-4">
       {/* Dream Input Section */}
       <div className="p-4 sm:p-5 rounded-2xl bg-white/5 border border-black/15">
         <DreamTextarea
