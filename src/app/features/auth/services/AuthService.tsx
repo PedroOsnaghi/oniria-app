@@ -26,7 +26,7 @@ export async function signUp(
     password,
     options: {
       data: { full_name: username, ...metadata },
-      emailRedirectTo: "http://localhost:5173/login",
+      emailRedirectTo: "http://localhost:5173/",
     },
   });
 }
