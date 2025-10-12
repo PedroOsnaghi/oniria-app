@@ -5,11 +5,7 @@ export type DreamAPIResponse = {
     emotion: string;
 };
 
-
-
-
 export class DreamsService {
-
 
     constructor() {
     }
