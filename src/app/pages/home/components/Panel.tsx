@@ -17,6 +17,8 @@ import BackButton from "@/shared/components/BackButton";
 import EmotionFilter from "../../history/components/EmotionFilter";
 import type { HistoryFilters } from "@/app/features/history/model/types";
 import { useCallback, useState } from "react";
+import SkeletonHistory from "../../history/components/Skeleton";
+import { useNavigate } from "react-router-dom";
 
 type HistoryVariantProps = {
   variant: "history";
@@ -30,6 +32,7 @@ type HistoryVariantProps = {
   ctaDisabled?: boolean;
   loading?: boolean;
   onChangeFilters?: (filters: HistoryFilters) => void;
+  scrollable?: boolean;
 };
 
 type HomeVariantProps = {
@@ -58,6 +61,7 @@ function HistoryPanel(props: HistoryVariantProps) {
     loading = false,
     onChangeFilters,
   } = props;
+  const navigate = useNavigate();
 
   const handleEmotionChange = useCallback(
     (emotions: string[]) => {
@@ -87,33 +91,44 @@ function HistoryPanel(props: HistoryVariantProps) {
     onEmotionChange: handleEmotionChange,
   });
 
+  const onBackHome = () => {
+    navigate("/home");
+  };
+
   return (
     <Card.Container
       className={`col-span-12 md:col-span-3 min-w-[300px] text-[15px] space-y-3 transition-all duration-300 overflow-y-hidden`}
+      scrollable={props.scrollable}
     >
-      <SidebarHeader title={title} description={description} />
+      <BackButton onClick={onBackHome} />
+      <Card.Root className="flex flex-col h-full justify-between p-6 sm:p-6">
+        <SidebarHeader title={title} description={description} />
 
-      {loading ? (
-        <div className="space-y-4 flex-1">
-          {[...Array(5)].map((_, i) => (
-            <div
-              key={i}
-              className="h-6 w-full rounded animate-pulse"
-              style={{ backgroundColor: "var(--skeleton-bg)" }}
-            />
-          ))}
-        </div>
-      ) : (
-        <>
-          <EmotionFilter
-            items={timeline}
-            selected={selectedEmotions}
-            onChange={setSelectedEmotions}
-            className="sticky top-0 z-10 bg-transparent pt-1"
-          />
+        <EmotionFilter
+          items={timeline}
+          selected={selectedEmotions}
+          onChange={setSelectedEmotions}
+          className="sticky top-0 z-10 bg-transparent pt-1 mb-8"
+        />
 
-          <div className="relative flex-1 overflow-y-auto pr-2 custom-scrollbar">
-            <TimelineProgressBar progress={progress} height={barHeight} />
+        <div className="relative flex-1 overflow-y-auto pr-2 min-h-[400px]">
+          <TimelineProgressBar progress={progress} height={barHeight} />
+          {loading ? (
+            <div className="h-full">
+              <SkeletonHistory withLine={false} />
+            </div>
+          ) : items.length === 0 ? (
+            <div className="flex items-center justify-center h-full">
+              <div className="text-center space-y-2">
+                <p className="text-white/60 text-sm">
+                  No hay sueños con este filtro.
+                </p>
+                <p className="text-white/40 text-xs">
+                  Intenta con otra emoción.
+                </p>
+              </div>
+            </div>
+          ) : (
             <TimelineList
               items={items}
               selectedId={selectedId}
@@ -121,16 +136,16 @@ function HistoryPanel(props: HistoryVariantProps) {
               listRef={listRef}
               itemRefs={itemRefs}
             />
-          </div>
+          )}
+        </div>
 
-          <div
-            className="mt-4 pt-4 border-t"
-            style={{ borderColor: "var(--surface-weak)" }}
-          >
-            <CtaButton ctaText={ctaText} disabled={props.ctaDisabled} />
-          </div>
-        </>
-      )}
+        <div
+          className="mt-auto pt-6 border-t"
+          style={{ borderColor: "var(--surface-weak)" }}
+        >
+          <CtaButton ctaText={ctaText} disabled={props.ctaDisabled} />
+        </div>
+      </Card.Root>
     </Card.Container>
   );
 }
@@ -217,7 +232,7 @@ function HomePanel(props: HomeVariantProps) {
               }}
             >
               <span className="inline-flex items-center gap-2">
-                {t("node.interpretar")}
+                {t("node.interpret")}
               </span>
             </button>
           )}
@@ -239,24 +254,42 @@ function HomePanel(props: HomeVariantProps) {
           <Card.Description>{t("node.myroomDesc")}</Card.Description>
 
           <Card.Body>
-            <MenuButton
+            {/*TODO descomentar luego del mvp1*/}
+            {/* <MenuButton
               icon={<SettingsIcon />}
-              title={t("node.personalizar")}
-              description={t("node.toque")}
+              title={t("node.customize")}
+              description={t("node.touch")}
               onClick={handlePersonalizar}
             />
 
             <MenuButton
               icon={<BadgeIcon />}
-              title={t("node.insignia")}
-              description={t("node.descriptionInsignia")}
+              title={t("node.badges")}
+              description={t("node.badgesDesc")}
+              onClick={handleInsignias}
+            />*/}
+
+            {/*TODO sacar luego del mvp1*/}
+            <MenuButton
+              icon={<SettingsIcon />}
+              title={t("home.soon", "Próximamente…")}
+              description={t("node.touch")}
+              disabled
+              onClick={handlePersonalizar}
+            />
+
+            <MenuButton
+              icon={<BadgeIcon />}
+              title={t("home.soon", "Próximamente…")}
+              description={t("node.badgesDesc")}
+              disabled
               onClick={handleInsignias}
             />
 
             <MenuButton
               icon={<ClockIcon />}
-              title={t("historial.link")}
-              description={t("historial.verSuenos")}
+              title={t("history.link")}
+              description={t("history.seeDreams")}
               onClick={handleNavigateHistory}
             />
           </Card.Body>
@@ -265,7 +298,7 @@ function HomePanel(props: HomeVariantProps) {
 
       {!expanded && (
         <CtaButton
-          ctaText={t("historial.oniriaPro")}
+          ctaText={t("history.oniriaPro")}
           disabled={false}
           pressed={false}
         />

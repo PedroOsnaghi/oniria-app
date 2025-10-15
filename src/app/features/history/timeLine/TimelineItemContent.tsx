@@ -15,10 +15,11 @@ export function TimelineItemContent({
                 {creationDate}
             </div>
             <div
-                className={`truncate ${isActive
-                    ? "font-semibold text-[var(--color-text-primary)]"
-                    : "text-[var(--color-text-secondary)]"
-                    }`}
+                className={["truncate transition-colors",
+                    isActive
+                        ? "font-semibold text-[var(--color-text-primary)]"
+                        : "text-[var(--color-text-secondary)] opacity-60 group-hover:opacity-90 focus:opacity-90"
+                ].join(" ")}
             >
                 {title}
             </div>

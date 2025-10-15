@@ -20,7 +20,6 @@ export function TimelineList({
             tabIndex={0}
             className="space-y-8 pl-12 pr-4 outline-none"
             aria-label="Línea de tiempo"
-            style={{ scrollBehavior: "smooth" }}
         >
             {items.map((item) => (
                 <TimelineItem

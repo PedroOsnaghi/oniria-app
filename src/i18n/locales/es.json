@@ -2,7 +2,8 @@
   "home": {
     "link": "Inicio",
     "title": "Bienvenido a Oniria",
-    "description": "Explora el mundo de los sueños con Oniria."
+    "description": "Explorá el mundo de los sueños con Oniria.",
+    "soon": "Próximamente..."
   },
   "login": {
     "textLink": "Registrate",
@@ -27,47 +28,51 @@
     "errorPasswordMatch": "Las contraseñas no coinciden",
     "text": "¿Ya tenés una cuenta?",
     "textLink": "Iniciá sesión",
-    "error": "Error al registrarse",
-    "success": "Registro exitoso. Revisa tu email para verificar la cuenta."
+    "success": "Revisá tu email para verificar la cuenta",
+    "successTitle": "Cuenta registrada",
+    "error": "Error al crear la cuenta"
   },
   "notFound": {
-    "link": "Ir al inicio",
-    "message": "Página no encontrada"
+    "message": "Página no encontrada",
+    "link": "Volver al inicio"
   },
-  "historial": {
+  "history": {
     "link": "Historial",
-    "verSuenos": "Ver tus sueños guardados",
-    "title": "Explora tus Nodos",
-    "description": "Revisá tus sueños interpretados. También podés filtrar por emoción.",
+    "seeDreams": "Mirá tus sueños guardados",
+    "returnHome": "Volver al inicio",
+    "title": "Explorá tus Nodos",
+    "description": "Revisá tus sueños interpretados y filtralos por emoción",
     "oniriaPro": "Probá Oniria PRO",
     "visibility": "Visibilidad",
     "public": "Público",
-    "insignia": "Insignias",
-    "emocion": "Emoción",
-    "soporte": "Soporte",
-    "atajos": "Atajos",
-    "salir": "Salir"
+    "badges": "Insignias",
+    "emotion": "Emoción",
+    "support": "Soporte",
+    "shortcuts": "Atajos",
+    "exit": "Salir"
   },
   "node": {
     "title": "¿Qué soñaste?",
-    "descriptionLabel": "Descubri el significado de tus sueños con nuestra IA.",
+    "descriptionLabel": "Descubrí el significado de tus sueños con nuestra IA",
     "placeholderNode": "Escribí tu sueño acá…",
     "character1": "Te pasaste del máximo de ",
     "character2": "caracteres",
-    "interpretar": "Interpretar",
+    "interpret": "Interpretar",
+    "todaysPhrase": "Frase del hoy",
+    "phraseHint": "Un guiño simbólico para arrancar...",
+    "newPhrase": "Nueva frase",
     "myroom": "Mi habitación",
-    "myroomDesc": "Gestiona tu espacio.",
-    "personalizar": "Personalizar",
-    "toque": "Dale tu toque al espacio",
-    "insignia": "Mis insignias",
-    "descriptionInsignia": "Gestioná tus logros dentro de Oniria.",
-    "suenoDelNodo": "Sueño del nodo",
-    "cerrar": "Cerrar",
-    "guardar": "Guardar",
-    "reinterpretar": "Reinterpretar",
-    "acaAparecera": "Acá aparecerá el contenido del sueño..."
+    "myroomDesc": "Gestioná tu espacio",
+    "customize": "Personalizar",
+    "touch": "Dale tu toque al espacio",
+    "badges": "Mis insignias",
+    "badgesDesc": "Gestioná tus logros dentro de Oniria",
+    "nodeDream": "Sueño del nodo",
+    "close": "Cerrar",
+    "save": "Guardar",
+    "reinterpret": "Reinterpretar",
+    "here": "Acá aparecerá el contenido del sueño..."
   },
-
   "header": {
     "loading": "Cargando...",
     "guest": "Invitado"

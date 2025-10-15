@@ -14,12 +14,12 @@ export default function ModalActions({ onSave, onReinterpret }: ModalActionsProp
         <div className="modal-actions">
             <button onClick={onSave} className="modal-button modal-button-save">
                 <SaveIcon />
-                {t("node.guardar")}
+                {t("node.save")}
             </button>
 
             <button onClick={onReinterpret} className="modal-button modal-button-reinterpret">
                 <SparklesIcon />
-                {t("node.reinterpretar")}
+                {t("node.reinterpret")}
             </button>
         </div>
     );

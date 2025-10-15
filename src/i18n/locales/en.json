@@ -2,7 +2,8 @@
   "home": {
     "link": "Home",
     "title": "Welcome to Oniria",
-    "description": "Explore the world of dreams with Oniria."
+    "description": "Explore the world of dreams with Oniria.",
+    "soon": "Coming soon..."
   },
   "login": {
     "link": "Log In",
@@ -28,44 +29,50 @@
     "errorPasswordMatch": "Passwords do not match",
     "text": "Already have an account?",
     "textLink": "Log In",
-    "success": "Account created successfully. Please check your email to confirm your account.",
+    "success": "Please check your email to confirm your account",
+    "successTitle": "Account created",
     "error": "Error creating account"
   },
   "notFound": {
     "message": "Page not found",
     "link": "Back to Home"
   },
-  "historial": {
+  "history": {
     "link": "History",
-    "verSuenos": "See your saved dreams",
+    "seeDreams": "See your saved dreams",
+    "returnHome": "Back to home",
     "title": "Explore your Nodes",
-    "description": "Review your interpreted dreams. You can also filter by emotion.",
+    "description": "Review your interpreted dreams and filter them by emotion",
     "oniriaPro": "Try Oniria PRO",
     "visibility": "Visibility",
     "public": "Public",
-    "insignia": "Badges",
-    "emocion": "Emotion",
-    "soporte": "Support",
-    "atajos": "Shortcuts",
-    "salir": "Exit"
+    "badges": "Badges",
+    "emotion": "Emotion",
+    "support": "Support",
+    "shortcuts": "Shortcuts",
+    "exit": "Exit"
   },
   "node": {
     "title": "What did you dream?",
-    "descriptionLabel": "Write your dream",
+    "descriptionLabel": "Discover the meaning of your dreams with our AI",
     "placeholderNode": "Write your dream here…",
     "character1": "You exceeded the maximum of ",
     "character2": "characters",
-    "interpretar": "Interpreter",
+    "interpret": "Interpret",
+    "todaysPhrase": "Today's phrase",
+    "phraseHint": "A symbolic way to start...",
+    "newPhrase": "New phrase",
     "myroom": "My room",
-    "personalizar": "Customize",
-    "toque": "Add your touch to the space",
-    "insignia": "My badges",
-    "descriptionInsignia": "Manage your achievements within Oniria.",
-    "suenoDelNodo": "Node's dream",
-    "cerrar": "Close",
-    "guardar": "Save",
-    "reinterpretar": "Reinterpret",
-    "acaAparecera": "Here will appear the content of the dream..."
+    "myroomDesc": "Manage your space",
+    "customize": "Customize",
+    "touch": "Add your touch to the space",
+    "badges": "My badges",
+    "badgesDesc": "Manage your achievements within Oniria",
+    "nodeDream": "Node's dream",
+    "close": "Close",
+    "save": "Save",
+    "reinterpret": "Reinterpret",
+    "here": "Here will appear the content of the dream..."
   },
   "header": {
     "loading": "Loading...",
