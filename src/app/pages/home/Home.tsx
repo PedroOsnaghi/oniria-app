@@ -48,24 +48,13 @@ export default function Home() {
     engine.actions.viewNodes?.();
 
     setTimeout(async () => {
-      console.log("Ejecutando fetchDreams...");
       const response = await fetchDreams(dream);
-
-      console.log("fetchDreams response:", response);
-      console.log("Llamando engine.setDream...");
       engine.setDream(response as Dream);
-      console.log("engine.setDream completado");
     }, 500);
 
     //navegar a otra pagina con el resultado
     //navigate("/interpretacion");
   };
-  const canvasBg =
-    typeof window !== "undefined"
-      ? getComputedStyle(document.documentElement)
-          .getPropertyValue("--canvas-bg")
-          .trim() || "#000000"
-      : "#000000";
 
   return (
     <div
@@ -93,7 +82,12 @@ export default function Home() {
           <LoaderSystem />
 
           {roomId && skinId && (
-            <Engine.Canvas engineSettings={{ backgroundColor: canvasBg }}>
+            <Engine.Canvas
+              engineSettings={{
+                backgroundColor: "#000000",
+                cameraInitialPosition: [-2, 8, 3],
+              }}
+            >
               <Engine.Core>
                 <DebugSystem enabled={true} />
                 <InteractionSystem onObjectHoverEnter={hoverHandler} />

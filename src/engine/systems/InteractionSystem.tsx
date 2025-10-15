@@ -1,7 +1,7 @@
 import * as THREE from "three";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
-import { useEngineCore } from "@engine/core";
+import { useEngineCore, useRoomVersionFromEngine } from "@engine/core";
 import { useHandlers } from "../hooks";
 import type { ObjectEventArray } from "../config/room.type";
 import { EngineState } from "@engine/core";
@@ -50,6 +50,20 @@ export default function InteractionSystem({
   const { activeRoom, activeNode, loopService, engineState } = core;
   const interactionService = core.getInteractionService();
   const handlers = useHandlers();
+  const roomVersion = useRoomVersionFromEngine();
+
+  // Referencias para mantener valores actuales sin causar re-renders
+  const activeRoomRef = useRef(activeRoom);
+  const activeNodeRef = useRef(activeNode);
+
+  // Actualizar referencias cuando cambien los valores
+  useEffect(() => {
+    activeRoomRef.current = activeRoom;
+  }, [activeRoom]);
+
+  useEffect(() => {
+    activeNodeRef.current = activeNode;
+  }, [activeNode]);
 
   // Estado para objetos interceptables
   const [interceptableObjects, setInterceptableObjects] = useState<
@@ -61,7 +75,7 @@ export default function InteractionSystem({
 
   // Cargar objetos interceptables de forma asíncrona (como AnimationSystem)
   useEffect(() => {
-    if (!isEngineReady || !activeRoom) {
+    if (!isEngineReady || !activeRoom || !activeRoom.hasScene()) {
       setInterceptableObjects({});
       return;
     }
@@ -78,7 +92,7 @@ export default function InteractionSystem({
     };
 
     loadInterceptables();
-  }, [activeRoom, isEngineReady]);
+  }, [activeRoom, isEngineReady, roomVersion]);
 
   // Configurar callbacks personalizados en el InteractionService
   useEffect(() => {
@@ -165,14 +179,18 @@ export default function InteractionSystem({
     }
 
     const updateInteractions = () => {
-      // Actualizar interacciones de Room solo si hay room activa
-      if (activeRoom && Object.keys(interceptableObjects).length > 0) {
-        interactionService.update(activeRoom, { interceptableObjects });
+      // Usar las referencias actuales para evitar dependencias que cambien constantemente
+      const currentActiveRoom = activeRoomRef.current;
+      const currentActiveNode = activeNodeRef.current;
+
+      // Actualizar interacciones de Room si hay room activa Y objetos interceptables
+      if (currentActiveRoom && Object.keys(interceptableObjects).length > 0) {
+        interactionService.update(currentActiveRoom, { interceptableObjects });
       }
 
       // Actualizar interacciones de Node si hay nodo activo (independiente de room)
-      if (activeNode) {
-        interactionService.update(activeNode, { radius: 1.0 });
+      if (currentActiveNode) {
+        interactionService.update(currentActiveNode, { radius: 1.0 });
       }
     };
 
@@ -181,10 +199,10 @@ export default function InteractionSystem({
   }, [
     loopService,
     interactionService,
-    activeRoom,
-    activeNode,
     isEngineReady,
     interceptableObjects,
+    // Removemos activeRoom y activeNode de las dependencias para evitar re-suscripciones constantes
+    // En su lugar, las funciones capturarán los valores actuales en tiempo de ejecución
   ]);
 
   return null;

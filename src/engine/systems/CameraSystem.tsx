@@ -130,7 +130,7 @@ export default function CameraSystem({
     const defaultConfig: CameraConfig = {
       minDistance: 3,
       maxDistance: 6,
-      position: new THREE.Vector3(-5, 3, 5),
+      position: new THREE.Vector3(-4, 3, 4),
       target: new THREE.Vector3(0, 1.8, 0),
       smoothTime: 0.5,
       maxPolarAngle: Math.PI / 2,

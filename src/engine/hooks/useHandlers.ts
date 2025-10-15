@@ -16,8 +16,8 @@ import { Node } from "../entities/Node";
  * handleObjectEvent('click', objectId, eventData);
  */
 export function useHandlers() {
-    const services = useEngineCore();
-    const animationService = services.getAnimationService();
+    const core = useEngineCore();
+    const animationService = core.getAnimationService();
 
     // Estado para controlar si hay una animación de navegación en curso
     const isNavigationAnimating = useRef(false);
@@ -160,7 +160,7 @@ export function useHandlers() {
         // Prevenir múltiples animaciones simultáneas
         if (isNavigationAnimating.current) return;
 
-        const activeNode = services.activeNode;
+        const activeNode = core.activeNode;
         const group = activeNode?.getGroup();
 
         if (!group || !animationService) {
@@ -262,7 +262,7 @@ export function useHandlers() {
         }
 
         timeline?.play();
-    }, [animationService, services]);
+    }, [animationService, core]);
 
     /**
      * Handler para animación al nodo anterior
@@ -277,7 +277,7 @@ export function useHandlers() {
 
         console.log(`🎬 Iniciando animación prev desde nodo: ${nodeId}`);
 
-        const activeNode = services.activeNode;
+        const activeNode = core.activeNode;
         const group = activeNode?.getGroup();
 
         if (!group || !animationService) {
@@ -392,7 +392,7 @@ export function useHandlers() {
         }
 
         timeline?.play();
-    }, [animationService, services]);
+    }, [animationService, core]);
 
     return { onObjectsEnter, onObjectsLeave, onObjectsClick, onNodeClick, onNodeEnter, onNodeLeave, handleNextNode, handlePrevNode };
 }
