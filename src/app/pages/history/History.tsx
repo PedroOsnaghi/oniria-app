@@ -3,10 +3,8 @@ import { useTranslation } from "react-i18next";
 import HeaderContainer from "@/shared/components/users/HeaderContainer";
 import UnifiedSidePanel from "../home/components/Panel";
 import { useTimelineData } from "@/app/features/history/hooks/useTimelineData";
-import HistoryContent from "./components/HistoryContent";
 import type { HistoryFilters } from "@/app/features/history/model/types";
 import { useCallback, useState } from "react";
-import { Canvas } from "@react-three/fiber";
 import { Engine } from "@/engine/core/namespace/EngineNamespace";
 import Card from "@/shared/components/Card";
 import NodeScene from "@/engine/scenes/NodeScene";
@@ -16,7 +14,7 @@ import * as THREE from "three";
 export default function History() {
   const { t } = useTranslation();
   const [filters, setFilters] = useState<HistoryFilters>({});
-  const { timeline, loading, error } = useTimelineData(filters);
+  const { timeline, loading } = useTimelineData(filters);
 
   const handleChangeFilters = useCallback((newFilters: HistoryFilters) => {
     setFilters(newFilters);

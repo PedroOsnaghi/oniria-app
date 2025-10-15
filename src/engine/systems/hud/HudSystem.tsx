@@ -3,9 +3,7 @@ import DreamCardModal from "./components/DreamCardModal";
 import { useCallback, useEffect, useState } from "react";
 import useDreams from "@/app/features/dreams/hooks/useDreams";
 
-interface HudSystemProps {}
-
-export default function HudSystem({}: HudSystemProps) {
+export default function HudSystem() {
   const [visible, setVisible] = useState(false);
   // Acceder al dream directamente desde el store
   const { dream, setDream } = useEngineStore();

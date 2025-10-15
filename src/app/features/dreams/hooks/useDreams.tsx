@@ -5,7 +5,6 @@ import {
 } from "../services/dreams.service";
 import type { Dream } from "@/engine/core/store/engineStore";
 import { useAuth } from "../../auth/hooks/useAuth";
-import Session from "@supabase/supabase-js";
 
 export default function useDreams() {
   const [dreams, setDreams] = useState<DreamAPIResponse[]>([]);

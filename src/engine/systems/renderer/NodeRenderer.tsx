@@ -5,7 +5,6 @@ import { Float } from "@react-three/drei";
 import { useEngineCore } from "@engine/core";
 import { useEngineStore } from "@engine/core";
 import { EngineState } from "@engine/core";
-import { is } from "@react-three/fiber/dist/declarations/src/core/utils";
 
 interface NodeRendererProps {
   ref: React.Ref<THREE.Group<THREE.Object3DEventMap> | null>;
