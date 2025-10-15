@@ -20,6 +20,7 @@ export type UserSettings = {
 export type EngineSettings = {
     backgroundColor: ColorRepresentation
     cameraInitialPosition?: [number, number, number]
+    cameraRotation?: [number, number, number]
     cameraFOV?: number
 }
 

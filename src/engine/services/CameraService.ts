@@ -173,6 +173,18 @@ export class CameraService {
         this.controls.mouseButtons.wheel = value ? CameraControls.ACTION.DOLLY : CameraControls.ACTION.NONE;
     }
 
+    /**
+     * Configura el comportamiento del botón izquierdo del mouse
+     * @param action - 'rotate' para orbitar (por defecto) o 'pan' para paneo
+     */
+    setLeftMouseAction(action: 'rotate' | 'pan') {
+        if (action === 'pan') {
+            this.controls.mouseButtons.left = CameraControls.ACTION.TRUCK;
+        } else {
+            this.controls.mouseButtons.left = CameraControls.ACTION.ROTATE;
+        }
+    }
+
     addEventListener(type: keyof CameraControlsEventMap, listener: (_event: any) => void) {
         this.controls.addEventListener(type, listener);
     }

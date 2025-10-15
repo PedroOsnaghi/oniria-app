@@ -82,6 +82,12 @@ export function useHandlers() {
             return;
         }
 
+        // Verificar si animationService está disponible
+        if (!animationService) {
+            console.warn("AnimationService no está disponible");
+            return;
+        }
+
         // Buscar el material del nodo para animar el uniform
         const mesh = group.children[0]?.children[0] as THREE.Mesh;
         const material = mesh?.material as THREE.ShaderMaterial;

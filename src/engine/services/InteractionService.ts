@@ -279,7 +279,7 @@ export class InteractionService extends EventEmitter<InteractionEventMap> {
     private handleNodeEvent(phase: "enter" | "leave" | "move" | "click", distance: number, position: THREE.Vector3) {
 
         if (!this.currentNode) return;
-        console.log("capturando evento de nodo", phase, this.currentNode.id);
+
         const eventArgs: EventArgs<Node, { distance: number; position: THREE.Vector3 }> = {
             target: this.currentNode,
             data: { distance, position }
@@ -294,15 +294,12 @@ export class InteractionService extends EventEmitter<InteractionEventMap> {
                 this.onNodeEnterCallback?.(eventArgs);
                 break;
             case "leave":
-                console.log(this.isWithinNodeRadius)
                 this.onNodeLeaveCallback?.(eventArgs);
                 break;
             case "move":
-                console.log(this.isWithinNodeRadius)
                 this.onNodeMoveCallback?.(eventArgs);
                 break;
             case "click":
-                console.log("clicccc", this.isWithinNodeRadius)
                 this.onNodeClickCallback?.(eventArgs);
                 break;
         }

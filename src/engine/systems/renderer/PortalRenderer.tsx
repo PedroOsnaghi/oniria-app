@@ -87,27 +87,25 @@ export const PortalRenderer = ({ portal }: PortalRendererProps) => {
       const threshold = 1.5; // distancia umbral para considerar que la cámara está "dentro" del portal
 
       // Ajustar controles de cámara según proximidad al portal
-      // para no permitir zoom o paneo cuando estamos dentro del portal
-      // y aumentar la sensacion de gravedad al estar dentro del portal
+      // Solo aplicar configuraciones cuando NO hay NodeScene activa
       if (distance < threshold) {
-        cameraService.setDraggingSmoothTime(1);
-        cameraService.setMaxPolarAngle(1.63);
-        cameraService.setMinPolarAngle(1.5);
-        cameraService.setAzimuthMaxAngle(0.1);
-        cameraService.setAzimuthMinAngle(-0.1);
-        cameraService.setEnableZoom(false);
-        cameraService.setEnablePan(false);
+        // La cámara está dentro del portal - mostrar nodos
+        // NodeScene se encargará de su propia configuración de cámara
         setShowNodes(true);
       } else {
-        cameraService.setDraggingSmoothTime(0.1);
-        const defaultConfig = cameraService.getDefaultConfig();
-        if (defaultConfig) {
-          cameraService.setMaxPolarAngle(defaultConfig.maxPolarAngle!);
-          cameraService.setMinPolarAngle(defaultConfig.minPolarAngle!);
-          cameraService.setAzimuthMaxAngle(defaultConfig.maxAzimuthAngle!);
-          cameraService.setAzimuthMinAngle(defaultConfig.minAzimuthAngle!);
-          cameraService.setEnableZoom(true);
-          cameraService.setEnablePan(!!defaultConfig.enablePan);
+        // La cámara está fuera del portal - configuración para room
+        if (!showNodes) {
+          // Solo aplicar configuración de room si no hay nodos activos
+          cameraService.setDraggingSmoothTime(0.1);
+          const defaultConfig = cameraService.getDefaultConfig();
+          if (defaultConfig) {
+            cameraService.setMaxPolarAngle(defaultConfig.maxPolarAngle!);
+            cameraService.setMinPolarAngle(defaultConfig.minPolarAngle!);
+            cameraService.setAzimuthMaxAngle(defaultConfig.maxAzimuthAngle!);
+            cameraService.setAzimuthMinAngle(defaultConfig.minAzimuthAngle!);
+            cameraService.setEnableZoom(true);
+            cameraService.setEnablePan(!!defaultConfig.enablePan);
+          }
         }
         setShowNodes(false);
       }
@@ -119,7 +117,7 @@ export const PortalRenderer = ({ portal }: PortalRendererProps) => {
     return () => {
       cameraService.removeEventListener("rest", checkCameraInPortal);
     };
-  }, [isEngineReady, portal, getCameraService]);
+  }, [isEngineReady, portal, getCameraService, showNodes]);
 
   return (
     <>

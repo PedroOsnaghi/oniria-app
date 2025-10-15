@@ -20,6 +20,7 @@ export function EngineCanvas({
   engineSettings = {
     backgroundColor: "#000000",
     cameraInitialPosition: [-5, 4, 4],
+    cameraRotation: [0, 0, 0],
     cameraFOV: 45,
   },
   children,
@@ -35,6 +36,7 @@ export function EngineCanvas({
       camera={{
         fov: engineSettings.cameraFOV || 45,
         position: engineSettings.cameraInitialPosition || [-4, 4, 3],
+        rotation: engineSettings.cameraRotation || [0, 0, 0],
       }}
       onContextMenu={(e) => e.preventDefault()}
     >

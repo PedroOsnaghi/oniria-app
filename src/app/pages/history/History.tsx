@@ -8,7 +8,7 @@ import { useCallback, useState } from "react";
 import { Engine } from "@/engine/core/namespace/EngineNamespace";
 import Card from "@/shared/components/Card";
 import NodeScene from "@/engine/scenes/NodeScene";
-import { CameraSystem } from "@/engine";
+import { CameraSystem, InteractionSystem } from "@/engine";
 import * as THREE from "three";
 
 export default function History() {
@@ -49,6 +49,8 @@ export default function History() {
                   target: new THREE.Vector3(0, 0, 0),
                 }}
               />
+
+              <InteractionSystem />
               <NodeScene position={[0, 0, 0]} />
             </Engine.Core>
           </Engine.Canvas>

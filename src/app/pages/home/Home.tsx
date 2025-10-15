@@ -98,12 +98,7 @@ export default function Home() {
                 <DebugSystem enabled={true} />
                 <InteractionSystem onObjectHoverEnter={hoverHandler} />
                 <AnimationSystem />
-                <CameraSystem
-                  config={{
-                    position: new THREE.Vector3(-4, 3, 4),
-                    target: new THREE.Vector3(0, 1.8, 0),
-                  }}
-                />
+                <CameraSystem />
                 <RoomScene />
               </Engine.Core>
             </Engine.Canvas>

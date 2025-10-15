@@ -160,15 +160,17 @@ export default function InteractionSystem({
 
   // Actualizar interacciones en el loop
   useEffect(() => {
-    if (!isEngineReady || !loopService || !interactionService || !activeRoom) {
+    if (!isEngineReady || !loopService || !interactionService) {
       return;
     }
 
     const updateInteractions = () => {
-      if (Object.keys(interceptableObjects).length > 0) {
+      // Actualizar interacciones de Room solo si hay room activa
+      if (activeRoom && Object.keys(interceptableObjects).length > 0) {
         interactionService.update(activeRoom, { interceptableObjects });
       }
 
+      // Actualizar interacciones de Node si hay nodo activo (independiente de room)
       if (activeNode) {
         interactionService.update(activeNode, { radius: 1.0 });
       }
