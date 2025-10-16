@@ -8,6 +8,7 @@ interface DreamCardModalProps {
   visibility?: boolean;
   text?: string;
   title?: string;
+  actionsVisible?: boolean;
   typingSpeed?: number; // caracteres por segundo
   onClose?: () => void;
   onSave?: () => void;
@@ -19,6 +20,7 @@ export default function DreamCardModal({
   text = "es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500...",
   title = "Dream Modal",
   typingSpeed = 50,
+  actionsVisible = true,
   onClose,
   onSave,
   onReinterpret,
@@ -30,6 +32,7 @@ export default function DreamCardModal({
   const headerRef = useRef<HTMLDivElement>(null);
   const actionsRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
+  const typingIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
   // Estados de animación
   const [isVisible, setIsVisible] = useState(false);
@@ -37,6 +40,7 @@ export default function DreamCardModal({
   const [showActions, setShowActions] = useState(false);
   const [displayedText, setDisplayedText] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [currentText, setCurrentText] = useState(text); // Para trackear cambios de texto
 
   // Animación de aparición/desaparición del modal
   const animateVisibility = useCallback(
@@ -111,6 +115,7 @@ export default function DreamCardModal({
               }, "-=0.1")
               .call(() => {
                 if (text) {
+                  setCurrentText(text); // Establecer el texto actual
                   setIsTyping(true);
                   startTypingAnimation(text, typingSpeed);
                 }
@@ -148,22 +153,36 @@ export default function DreamCardModal({
     (fullText: string, speed: number) => {
       if (!fullText) return;
 
+      // Limpiar cualquier intervalo anterior
+      if (typingIntervalRef.current) {
+        clearInterval(typingIntervalRef.current);
+        typingIntervalRef.current = null;
+      }
+
       setDisplayedText("");
       let currentIndex = 0;
       const intervalTime = 1000 / speed; // milisegundos por caracter
 
-      const typingInterval = setInterval(() => {
+      typingIntervalRef.current = setInterval(() => {
         if (currentIndex < fullText.length) {
           setDisplayedText((prev) => prev + fullText[currentIndex]);
           currentIndex++;
         } else {
-          clearInterval(typingInterval);
+          if (typingIntervalRef.current) {
+            clearInterval(typingIntervalRef.current);
+            typingIntervalRef.current = null;
+          }
           setIsTyping(false);
         }
       }, intervalTime);
 
       // Cleanup function
-      return () => clearInterval(typingInterval);
+      return () => {
+        if (typingIntervalRef.current) {
+          clearInterval(typingIntervalRef.current);
+          typingIntervalRef.current = null;
+        }
+      };
     },
     []
   );
@@ -186,6 +205,33 @@ export default function DreamCardModal({
       setIsVisible(false);
     }
   }, [visibility]);
+
+  // Responder a cambios en el texto cuando el modal ya está visible
+  useEffect(() => {
+    if (isVisible && text && showActions && text !== currentText) {
+      // Solo actualizar si el modal ya está completamente visible Y el texto realmente cambió
+      setCurrentText(text);
+      setIsTyping(true);
+      startTypingAnimation(text, typingSpeed);
+    }
+  }, [
+    text,
+    isVisible,
+    showActions,
+    currentText,
+    startTypingAnimation,
+    typingSpeed,
+  ]);
+
+  // Cleanup cuando el componente se desmonte
+  useEffect(() => {
+    return () => {
+      if (typingIntervalRef.current) {
+        clearInterval(typingIntervalRef.current);
+        typingIntervalRef.current = null;
+      }
+    };
+  }, []);
 
   // Handlers
   const handleClose = useCallback(() => {
@@ -249,7 +295,11 @@ export default function DreamCardModal({
             !showActions ? "invisible" : "visible"
           }`}
         >
-          <ModalActions onSave={handleSave} onReinterpret={handleReinterpret} />
+          <ModalActions
+            onSave={handleSave}
+            onReinterpret={handleReinterpret}
+            visibility={actionsVisible}
+          />
         </div>
       </Card.Container>
     </div>

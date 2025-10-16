@@ -87,6 +87,33 @@
     box-shadow: 0 0 28px rgba(217, 70, 239, 0.5);
 }
 
+.modal-button-saving {
+    background: linear-gradient(to right, rgb(75 85 99), rgb(107 114 128));
+    box-shadow: 0 0 22px rgba(156, 163, 175, 0.35);
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+.modal-button-saving:hover {
+    box-shadow: 0 0 22px rgba(156, 163, 175, 0.35);
+    transform: none;
+}
+
+.modal-button-saved {
+    background: linear-gradient(to right, rgb(48, 168, 187), rgb(52, 165, 131));
+    box-shadow: 0 0 22px rgba(34, 197, 94, 0.35);
+    cursor: default;
+}
+
+.modal-button-saved:hover {
+    box-shadow: 0 0 28px rgba(34, 197, 94, 0.5);
+    transform: none;
+}
+
+.modal-button:disabled {
+    pointer-events: none;
+}
+
 .modal-button-reinterpret {
     background: linear-gradient(to right, rgb(134 25 143), rgb(162 28 175));
 }

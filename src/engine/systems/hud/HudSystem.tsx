@@ -50,6 +50,7 @@ export default function HudSystem() {
         title={dream?.title || "Tu sueño"}
         text={dream?.interpretation || "Descripción del sueño..."}
         typingSpeed={80}
+        actionsVisible={dream?.description !== undefined}
         onClose={handleDreamModalClose}
         onSave={handleSave}
         onReinterpret={() => console.log("Reinterpretar")}

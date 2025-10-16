@@ -4,9 +4,9 @@ import { create } from "zustand";
 // Tipo para los datos del sueño
 export interface Dream {
     title: string;
-    description: string;
+    description?: string;
     interpretation: string;
-    emotion: string;
+    emotion?: string;
 }
 
 type LoadingItem = {

@@ -170,7 +170,12 @@ export default function InteractionSystem({
       activeNode.off("onNextNode");
       activeNode.off("onPrevNode");
     };
-  }, [isEngineReady, activeNode]);
+  }, [
+    isEngineReady,
+    activeNode,
+    handlers.handleNextNode,
+    handlers.handlePrevNode,
+  ]);
 
   // Actualizar interacciones en el loop
   useEffect(() => {

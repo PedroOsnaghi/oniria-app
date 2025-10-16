@@ -38,13 +38,12 @@ export function useTransitions() {
     const viewReset = useCallback(() => {
         if (!cameraService) return;
 
-        // Solo resetear a posición inicial si NO hay una sala activa
-        // Esto evita interferir con la navegación por portales en el contexto principal
-        if (!activeRoom) {
-            cameraService.resetInitialPosition();
-        }
+        // Siempre resetear a posición inicial
+        // La lógica anterior era para evitar interferencias con portales,
+        // pero eso se maneja mejor en el CameraSystem con la configuración
+        cameraService.resetInitialPosition();
 
-    }, [cameraService, activeRoom]);
+    }, [cameraService]);
 
     return { viewNodes, viewReset };
 }
