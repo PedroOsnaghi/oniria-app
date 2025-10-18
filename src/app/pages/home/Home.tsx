@@ -89,7 +89,7 @@ export default function Home() {
               }}
             >
               <Engine.Core>
-                {/* <DebugSystem enabled={true} /> */}
+                <DebugSystem enabled={true} />
                 <InteractionSystem onObjectHoverEnter={hoverHandler} />
                 <AnimationSystem />
                 <CameraSystem />

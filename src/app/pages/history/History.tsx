@@ -10,6 +10,7 @@ import Card from "@/shared/components/Card";
 import NodeScene from "@/engine/scenes/NodeScene";
 import {
   CameraSystem,
+  DebugSystem,
   InteractionSystem,
   useEngine,
   useEngineStore,
@@ -76,6 +77,7 @@ export default function History() {
             }}
           >
             <Engine.Core>
+              <DebugSystem enabled={true} />
               <CameraSystem
                 config={{
                   position: new THREE.Vector3(0, 0, 3),
