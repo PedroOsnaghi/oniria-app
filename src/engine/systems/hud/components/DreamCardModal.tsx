@@ -117,6 +117,7 @@ export default function DreamCardModal({
                 if (text) {
                   setCurrentText(text); // Establecer el texto actual
                   setIsTyping(true);
+                  console.log("Texto recibido en modal:", text);
                   startTypingAnimation(text, typingSpeed);
                 }
               });
@@ -153,30 +154,45 @@ export default function DreamCardModal({
     (fullText: string, speed: number) => {
       if (!fullText) return;
 
-      // Limpiar cualquier intervalo anterior
+      // Limpieza del texto recibido
+      const cleanText = fullText
+        .replace(/^undefined/i, "")
+        .replace(/undefined$/i, "")
+        .trimStart()
+        .trimEnd();
+
+      // Limpiar intervalos anteriores
       if (typingIntervalRef.current) {
         clearInterval(typingIntervalRef.current);
         typingIntervalRef.current = null;
       }
 
+      // Reiniciar texto y estado
       setDisplayedText("");
+      setIsTyping(true);
+
       let currentIndex = 0;
-      const intervalTime = 1000 / speed; // milisegundos por caracter
+      const intervalTime = 1000 / speed;
 
-      typingIntervalRef.current = setInterval(() => {
-        if (currentIndex < fullText.length) {
-          setDisplayedText((prev) => prev + fullText[currentIndex]);
-          currentIndex++;
-        } else {
-          if (typingIntervalRef.current) {
-            clearInterval(typingIntervalRef.current);
-            typingIntervalRef.current = null;
-          }
-          setIsTyping(false);
-        }
-      }, intervalTime);
+      // Delay para garantizar que el render inicial se complete
+      setTimeout(() => {
+        typingIntervalRef.current = setInterval(() => {
+          setDisplayedText((prev) => {
+            if (currentIndex < cleanText.length) {
+              const next = prev + cleanText[currentIndex];
+              currentIndex++;
+              return next;
+            } else {
+              clearInterval(typingIntervalRef.current!);
+              typingIntervalRef.current = null;
+              setIsTyping(false);
+              return prev;
+            }
+          });
+        }, intervalTime);
+      }, 50);
 
-      // Cleanup function
+      // Cleanup
       return () => {
         if (typingIntervalRef.current) {
           clearInterval(typingIntervalRef.current);
@@ -265,9 +281,8 @@ export default function DreamCardModal({
       <Card.Container className="relative flex flex-col origin-center w-[450px] max-h-[70%]  border border-white/15 bg-white/10 backdrop-blur-md p-4 sm:p-5 shadow-[0_0_35px_rgba(217,70,239,0.25)]">
         <div
           ref={headerRef}
-          className={`opacity-0 -translate-y-2 transition-all duration-200 ${
-            !showHeader ? "invisible" : "visible"
-          }`}
+          className={`opacity-0 -translate-y-2 transition-all duration-200 ${!showHeader ? "invisible" : "visible"
+            }`}
         >
           <ModalHeader title={title} onClose={handleClose} />
         </div>
@@ -291,9 +306,8 @@ export default function DreamCardModal({
 
         <div
           ref={actionsRef}
-          className={`opacity-0 translate-y-2 transition-all duration-200 ${
-            !showActions ? "invisible" : "visible"
-          }`}
+          className={`opacity-0 translate-y-2 transition-all duration-200 ${!showActions ? "invisible" : "visible"
+            }`}
         >
           <ModalActions
             onSave={handleSave}
