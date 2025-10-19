@@ -148,33 +148,26 @@ export default function DreamCardModal({
     },
     [animation, text, typingSpeed]
   );
+  const hasAnimatedRef = useRef(false);
 
-  // Animación de typing text
   const startTypingAnimation = useCallback(
     (fullText: string, speed: number) => {
-      if (!fullText) return;
+      if (!fullText || hasAnimatedRef.current) return; // 👈 bloquea reinicio innecesario
+      hasAnimatedRef.current = true;
 
-      // Limpieza del texto recibido
       const cleanText = fullText
         .replace(/^undefined/i, "")
         .replace(/undefined$/i, "")
-        .trimStart()
-        .trimEnd();
+        .trim();
 
-      // Limpiar intervalos anteriores
-      if (typingIntervalRef.current) {
-        clearInterval(typingIntervalRef.current);
-        typingIntervalRef.current = null;
-      }
+      if (typingIntervalRef.current) clearInterval(typingIntervalRef.current);
 
-      // Reiniciar texto y estado
       setDisplayedText("");
       setIsTyping(true);
 
       let currentIndex = 0;
       const intervalTime = 1000 / speed;
 
-      // Delay para garantizar que el render inicial se complete
       setTimeout(() => {
         typingIntervalRef.current = setInterval(() => {
           setDisplayedText((prev) => {
@@ -191,17 +184,10 @@ export default function DreamCardModal({
           });
         }, intervalTime);
       }, 50);
-
-      // Cleanup
-      return () => {
-        if (typingIntervalRef.current) {
-          clearInterval(typingIntervalRef.current);
-          typingIntervalRef.current = null;
-        }
-      };
     },
     []
   );
+
 
   // Responder a cambios de visibility prop
   useEffect(() => {
@@ -253,11 +239,16 @@ export default function DreamCardModal({
   const handleClose = useCallback(() => {
     // Ejecutar animación de cierre primero
     animateVisibility(false);
+
+    // Reiniciar flag para permitir que la próxima vez se ejecute el typing
+    hasAnimatedRef.current = false;
+
     // Después de la animación, ejecutar el callback y actualizar el store
     setTimeout(() => {
       onClose?.();
-    }, 250); // 250ms es la nueva duración de la animación de salida
+    }, 250);
   }, [animateVisibility, onClose]);
+
 
   const handleSave = useCallback(() => {
     onSave?.();
