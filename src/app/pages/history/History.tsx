@@ -25,7 +25,7 @@ export default function History() {
   const engine = useEngine();
   const [filters, setFilters] = useState<HistoryFilters>({});
   const { timeline, loading } = useTimelineData(filters);
-  const { dream, setDream } = useEngineStore();
+  const { setDream } = useEngineStore();
 
   const handleChangeFilters = useCallback((newFilters: HistoryFilters) => {
     setFilters(newFilters);
