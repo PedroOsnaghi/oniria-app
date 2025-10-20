@@ -15,12 +15,13 @@ export default function CtaButton({
             <button
                 disabled={disabled}
                 className={`cta-button group flex w-full items-center justify-center gap-1 rounded-xl
-          bg-gradient-to-r from-[var(--btn-primary-from)] to-[var(--btn-primary-to)]
-          px-6 py-4 text-[15px] font-bold shadow-[var(--btn-shadow-strong)]
-          border border-[var(--btn-primary-border)]
-          hover:from-[var(--btn-primary-hover-from)] hover:to-[var(--btn-primary-hover-to)]
-          disabled:opacity-60 disabled:cursor-not-allowed
-          transition-all duration-200`}
+            bg-gradient-to-r from-[var(--btn-primary-from)] to-[var(--btn-primary-to)]
+            px-6 py-4 text-[15px] font-bold shadow-[var(--btn-shadow-strong)]
+            border border-[var(--btn-primary-border)]
+            hover:from-[var(--btn-primary-hover-from)] hover:to-[var(--btn-primary-hover-to)]
+            cursor-pointer
+            disabled:opacity-60 disabled:cursor-not-allowed
+            transition-all duration-200`}
                 aria-disabled={disabled}
             >
                 {ctaText}

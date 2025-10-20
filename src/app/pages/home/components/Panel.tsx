@@ -20,6 +20,7 @@ import SkeletonHistory from "../../history/components/Skeleton";
 import { useNavigate } from "react-router-dom";
 import "@/index.css";
 import { useEngineStore } from "@/engine/core";
+import SparklesIcon from "@/assets/icons/SparklesIcon";
 
 type HistoryVariantProps = {
   variant: "history";
@@ -38,13 +39,12 @@ type HistoryVariantProps = {
 
 type HomeVariantProps = {
   variant: "home";
-  onInterpretar?: (_dream: string) => void;
-  onPersonalizar?: () => void;
-  onInsignias?: () => void;
-  onBackHome?: () => void;
+  onInterpret?: (_dream: string) => void;
+  onCustomize?: () => void;
+  onBadges?: () => void;
   initialDream?: string;
   maxChars?: number;
-  onNuevaFrase?: () => void;
+  onNewQuote?: () => void;
   quote?: string;
   loadingQuote?: boolean;
   showQuoteCard?: boolean;
@@ -124,12 +124,8 @@ function HistoryPanel(props: HistoryVariantProps) {
           ) : items.length === 0 ? (
             <div className="flex items-center justify-center h-full">
               <div className="text-center space-y-2">
-                <p className="text-white/60 text-sm">
-                  No hay sueños con este filtro.
-                </p>
-                <p className="text-white/40 text-xs">
-                  Intenta con otra emoción.
-                </p>
+                <p className="text-white/60 text-sm">No hay sueños con este filtro</p>
+                <p className="text-white/40 text-xs">Intentá con otra emoción</p>
               </div>
             </div>
           ) : (
@@ -166,28 +162,28 @@ function HomePanel(props: HomeVariantProps) {
     isEmpty,
     isTooLong,
     handleTextChange,
-    handleInterpretar,
+    handleInterpret,
     quoteText,
     isLoadingQuote,
-    handleNuevaFrase,
-    handlePersonalizar,
-    handleInsignias,
+    handleNewQuote,
+    handleCustomize,
+    handleBadges,
     handleNavigateHistory,
   } = useHomePanel({
     initialDream: props.initialDream,
     maxChars: props.maxChars,
-    onNuevaFrase: props.onNuevaFrase,
+    onNewQuote: props.onNewQuote,
     quote: props.quote,
     loadingQuote: props.loadingQuote,
-    onInterpretar: props.onInterpretar,
-    onPersonalizar: props.onPersonalizar,
-    onInsignias: props.onInsignias,
+    onInterpret: props.onInterpret,
+    onCustomize: props.onCustomize,
+    onBadges: props.onBadges,
   });
 
-  const onInterpretarClick = async () => {
+  const onInterpretClick = async () => {
     if (isEmpty || isTooLong) return;
     setExpanded(true);
-    await handleInterpretar();
+    await handleInterpret();
   };
 
   const onBackHome = () => {
@@ -222,13 +218,15 @@ function HomePanel(props: HomeVariantProps) {
             isTooLong={isTooLong}
           />
 
+
           {!expanded && (
             <button
-              onClick={onInterpretarClick}
+              onClick={onInterpretClick}
               disabled={isEmpty || isTooLong}
               className="tap-button mt-4 w-full rounded-xl px-4 py-3 text-[14px] font-bold
-                       disabled:opacity-60 disabled:cursor-not-allowed
-                       transition-transform duration-200"
+                hover:cursor-pointer
+                disabled:opacity-60 disabled:cursor-not-allowed
+                transition-transform duration-200 active:scale-95"
               style={{
                 background: `linear-gradient(to right, var(--btn-primary-from), var(--btn-primary-to))`,
                 border: `1px solid var(--btn-primary-border)`,
@@ -236,20 +234,18 @@ function HomePanel(props: HomeVariantProps) {
               }}
             >
               <span className="inline-flex items-center gap-2">
+                <SparklesIcon className="w-5 h-5" />
                 {t("node.interpret")}
               </span>
             </button>
           )}
+
         </Card.Body>
       </Card.Root>
 
       {/*SOLO si NO esta expandido */}
       {!expanded && showQuoteCard && (
-        <QuoteCard
-          quote={quoteText}
-          isLoading={isLoadingQuote}
-          onRefresh={handleNuevaFrase}
-        />
+        <QuoteCard quote={quoteText} isLoading={isLoadingQuote} onRefresh={handleNewQuote} />
       )}
 
       {!expanded && (
@@ -263,14 +259,14 @@ function HomePanel(props: HomeVariantProps) {
               icon={<SettingsIcon />}
               title={t("node.customize")}
               description={t("node.touch")}
-              onClick={handlePersonalizar}
+              onClick={handleCustomize}
             />
 
             <MenuButton
               icon={<BadgeIcon />}
               title={t("node.badges")}
               description={t("node.badgesDesc")}
-              onClick={handleInsignias}
+              onClick={handleBadges}
             />*/}
 
             {/*TODO sacar luego del mvp1*/}
@@ -279,7 +275,7 @@ function HomePanel(props: HomeVariantProps) {
               title={t("home.soon", "Próximamente…")}
               description={t("node.touch")}
               disabled
-              onClick={handlePersonalizar}
+              onClick={handleCustomize}
             />
 
             <MenuButton
@@ -287,7 +283,7 @@ function HomePanel(props: HomeVariantProps) {
               title={t("home.soon", "Próximamente…")}
               description={t("node.badgesDesc")}
               disabled
-              onClick={handleInsignias}
+              onClick={handleBadges}
             />
 
             <MenuButton
@@ -301,15 +297,12 @@ function HomePanel(props: HomeVariantProps) {
       )}
 
       {!expanded && (
-        <CtaButton
-          ctaText={t("history.oniriaPro")}
-          disabled={false}
-          pressed={false}
-        />
+        <CtaButton ctaText={t("history.oniriaPro")} disabled={false} pressed={false} />
       )}
     </Card.Container>
   );
 }
+
 export default function UnifiedSidePanel(props: UnifiedSidePanelProps) {
   return props.variant === "history" ? (
     <HistoryPanel {...props} scrollable={false} />

@@ -16,9 +16,10 @@ export default function BackButton({ onClick, label }: BackButtonProps) {
             aria-label={buttonLabel}
             className="inline-flex w-fit max-w-fit !w-auto self-start
                 mb-0 inline-flex items-center gap-2 text-[13px] font-semibold 
-                 px-3 py-[6px] rounded-full border border-[var(--surface-weak)]
-                 hover:bg-[var(--surface-weak)] hover:text-[var(--color-text-primary)] 
-                 transition-all duration-300 ease-out"
+                px-3 py-[6px] rounded-full border border-[var(--surface-weak)]
+                hover:bg-[var(--surface-weak)] hover:text-[var(--color-text-primary)]
+                hover:cursor-pointer
+                transition-all duration-300 ease-out"
         >
             ← {buttonLabel}
         </button>

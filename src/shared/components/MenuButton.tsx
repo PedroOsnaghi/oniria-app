@@ -50,7 +50,7 @@ export default function MenuButton({
             title={isDisabled ? "Próximamente…" : undefined}
             className={[
                 "w-full mb-3 flex items-center justify-between rounded-xl border px-3 py-3 text-left transition-colors duration-200",
-                isDisabled ? "opacity-60 cursor-not-allowed" : "",
+                isDisabled ? "opacity-60 cursor-not-allowed" : "cursor-pointer",
             ].join(" ")}
             style={{
                 backgroundColor: bg,

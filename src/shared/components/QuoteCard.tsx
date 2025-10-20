@@ -51,22 +51,25 @@ export default function QuoteCard({
           </div>
         </div>
 
-        <button
-          onClick={onRefresh}
-          disabled={isLoading}
-          className="tap-button w-full rounded-xl px-4 py-3 text-[14px] font-semibold border transition-transform duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
-          style={{
-            background: `linear-gradient(to right, var(--btn-refresh-from), var(--btn-refresh-to))`,
-            borderColor: "var(--btn-refresh-border)",
-            boxShadow: "var(--btn-refresh-shadow)",
-          }}
-        >
-          <span className="inline-flex items-center gap-2">
-            <RefreshIcon spinning={isLoading} />
-            {t("node.newPhrase", "Nueva frase")}
-          </span>
-        </button>
-      </Card.Body>
-    </Card.Root>
-  );
+                <button
+                    onClick={onRefresh}
+                    disabled={isLoading}
+                    className="tap-button w-full rounded-xl px-4 py-3 text-[14px] font-semibold border 
+                               transition-transform duration-200 
+                               hover:cursor-pointer 
+                               disabled:opacity-60 disabled:cursor-not-allowed"
+                    style={{
+                        background: `linear-gradient(to right, var(--btn-refresh-from), var(--btn-refresh-to))`,
+                        borderColor: "var(--btn-refresh-border)",
+                        boxShadow: "var(--btn-refresh-shadow)",
+                    }}
+                >
+                    <span className="inline-flex items-center gap-2">
+                        <RefreshIcon spinning={isLoading} />
+                        {t("node.newPhrase", "Nueva frase")}
+                    </span>
+                </button>
+            </Card.Body>
+        </Card.Root>
+    );
 }

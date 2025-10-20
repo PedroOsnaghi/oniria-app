@@ -1,6 +1,7 @@
 import "./styles/Header.css";
 import HeaderLogo from "./HeaderLogo";
 import HeaderActions from "@/app/features/users/actions/HeaderActions";
+import { useNavigate } from "react-router-dom";
 
 type HeaderProps = {
   logoText?: string;
@@ -16,11 +17,15 @@ export default function Header({
   logoText = "",
   userName = "",
   userEmail = "",
-  onLogoClick,
   onNotificationClick,
   onProfileClick,
   onMenuClick,
 }: HeaderProps) {
+  const navigate = useNavigate();
+
+  const onLogoClick = () => {
+    navigate("/home");
+  };
   return (
     <header className="header container-header mx-auto">
       <HeaderLogo text={logoText} onClick={onLogoClick} />

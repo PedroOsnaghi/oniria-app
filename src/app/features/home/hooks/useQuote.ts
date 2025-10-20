@@ -1,8 +1,15 @@
 import { useState } from "react";
 import { QuotesService, type QuotesAPIResponse } from "../services/quotes.service";
 
-export default function UseQuoteS({ initialQuote, initialLoading, onNuevaFrase }: { initialQuote: string; initialLoading: boolean; onNuevaFrase: (() => void) | undefined; }) {
-
+export default function useQuote({
+  initialQuote,
+  initialLoading,
+  onNewQuote,
+}: {
+  initialQuote: string;
+  initialLoading: boolean;
+  onNewQuote?: () => void;
+}) {
   const [quotes, setQuotes] = useState<QuotesAPIResponse[]>([]);
   const [quoteText, setQuoteText] = useState(initialQuote);
   const [isLoading, setIsLoading] = useState(initialLoading);
@@ -15,7 +22,7 @@ export default function UseQuoteS({ initialQuote, initialLoading, onNuevaFrase }
       const q = await service.fetchQuotes();
       setQuotes(Array.isArray(q) ? q : [q]);
       setQuoteText(initialQuote);
-      onNuevaFrase?.();
+      onNewQuote?.();
     } finally {
       setIsLoading(false);
     }

@@ -5,47 +5,47 @@ import useQuote from "./useQuote";
 interface UseHomePanelProps {
     initialDream?: string;
     maxChars?: number;
-    onNuevaFrase?: () => void;
+    onNewQuote?: () => void;
     quote?: string;
     loadingQuote?: boolean;
-    onInterpretar?: (dream: string) => void;
-    onPersonalizar?: () => void;
-    onInsignias?: () => void;
+    onInterpret?: (dream: string) => void;
+    onCustomize?: () => void;
+    onBadges?: () => void;
 }
 
 export function useHomePanel({
     initialDream = "",
     maxChars = 1200,
-    onNuevaFrase,
+    onNewQuote,
     quote = "Lo que no se nombra, se sueña",
     loadingQuote = false,
-    onInterpretar,
-    onPersonalizar,
-    onInsignias,
+    onInterpret,
+    onCustomize,
+    onBadges,
 }: UseHomePanelProps) {
     const navigate = useNavigate();
 
     const { dream, dreamRef, charsLeft, isEmpty, isTooLong, handleTextChange } =
         useDreamInput({ initialDream, maxChars });
 
-    const { quoteText, isLoading: isLoadingQuote, handleRefresh: handleNuevaFrase } = useQuote({
+    const { quoteText, isLoading: isLoadingQuote, handleRefresh: handleNewQuote } = useQuote({
         initialQuote: quote,
         initialLoading: loadingQuote,
-        onNuevaFrase,
+        onNewQuote,
     });
 
-    const handleInterpretar = () => {
+    const handleInterpret = () => {
         if (!isEmpty && !isTooLong) {
-            onInterpretar?.(dreamRef.current?.value || "");
+            onInterpret?.(dreamRef.current?.value || "");
         }
     };
 
-    const handlePersonalizar = () => {
-        onPersonalizar?.();
+    const handleCustomize = () => {
+        onCustomize?.();
     };
 
-    const handleInsignias = () => {
-        onInsignias?.();
+    const handleBadges = () => {
+        onBadges?.();
     };
 
     const handleNavigateHistory = () => {
@@ -63,12 +63,12 @@ export function useHomePanel({
         isEmpty,
         isTooLong,
         handleTextChange,
-        handleInterpretar,
+        handleInterpret,
         quoteText,
         isLoadingQuote,
-        handleNuevaFrase,
-        handlePersonalizar,
-        handleInsignias,
+        handleNewQuote,
+        handleCustomize,
+        handleBadges,
         handleNavigateHistory,
         handleCtaClick,
     };
