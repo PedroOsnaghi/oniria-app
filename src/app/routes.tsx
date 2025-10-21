@@ -1,6 +1,4 @@
 import { Home, History, Login, Register, NotFound } from "./pages";
-import { EngineApiProvider } from "@/engine";
-import { Leva } from "leva";
 import { createBrowserRouter } from "react-router";
 import PrivateRoute from "@/app/features/auth/components/PrivateRoute";
 
@@ -13,10 +11,7 @@ export const routes = createBrowserRouter([
     path: "/home",
     element: (
       <PrivateRoute>
-        <EngineApiProvider>
-          <Leva collapsed />
-          <Home />
-        </EngineApiProvider>
+        <Home />
       </PrivateRoute>
     ),
   },

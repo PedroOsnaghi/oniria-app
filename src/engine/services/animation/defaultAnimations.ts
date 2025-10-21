@@ -117,12 +117,96 @@ export const rotateToAnimation: AnimationHandler = (target, config) => {
 };
 
 /**
+ * Animación para mostrar modal con escala desde centro-izquierdo
+ */
+export const modalShowAnimation: AnimationHandler = (target, config) => {
+    const { duration = 0.3, ease = "power2.out" } = config.params;
+
+    const tl = gsap.timeline();
+
+    tl.to(target, {
+        scale: 1,
+        duration,
+        ease,
+        transformOrigin: "left center"
+    });
+
+    return tl;
+};
+
+/**
+ * Animación para ocultar modal con escala hacia centro-izquierdo
+ */
+export const modalHideAnimation: AnimationHandler = (target, config) => {
+    const { duration = 0.25, ease = "power2.in" } = config.params;
+
+    const tl = gsap.timeline();
+
+    tl.to(target, {
+        scale: 0,
+        duration,
+        ease,
+        transformOrigin: "left center"
+    });
+
+    return tl;
+};
+
+/**
+ * Animación de entrada para elementos del modal (fade + slide)
+ */
+export const modalElementEnterAnimation: AnimationHandler = (target, config) => {
+    const {
+        duration = 0.2,
+        ease = "power2.out"
+    } = config.params;
+
+    const tl = gsap.timeline();
+
+    tl.to(target, {
+        opacity: 1,
+        y: 0,
+        duration,
+        ease
+    });
+
+    return tl;
+};
+
+/**
+ * Animación idle para el nodo - movimiento sutil hacia la izquierda
+ */
+export const nodeIdleAnimation: AnimationHandler = (target, config) => {
+    const {
+        offsetX = -0.2,
+        duration = 1.5,
+        ease = "power2.inOut"
+    } = config.params;
+
+    const originalX = target.position.x;
+    const tl = gsap.timeline({ repeat: config.loop ? -1 : 0 });
+
+    tl.to(target.position, {
+        x: originalX + offsetX,
+        duration,
+        ease,
+    })
+        .to(target.position, {
+            x: originalX,
+            duration,
+            ease,
+        });
+
+    return tl;
+};
+
+/**
  * Metadatos de las animaciones por defecto
  */
 export const defaultAnimationsMetadata: Record<string, AnimationMetadata> = {
     pendulum: {
         name: "pendulum",
-        description: "Animación de péndulo con movimiento oscilatorio en un eje específico",
+        description: "Animación de péndulo con rotación en un eje específico",
         defaultParams: {
             axis: [0, 1, 0],
             angle: 30,
@@ -135,7 +219,7 @@ export const defaultAnimationsMetadata: Record<string, AnimationMetadata> = {
     },
     rotate: {
         name: "rotate",
-        description: "Rotación continua usando quaterniones en un eje específico",
+        description: "Animación de rotación continua en un eje específico",
         defaultParams: {
             axis: [0, 1, 0],
             to: 360,
@@ -154,6 +238,43 @@ export const defaultAnimationsMetadata: Record<string, AnimationMetadata> = {
             ease: "none"
         },
         requiredParams: []
+    },
+    modalShow: {
+        name: "modalShow",
+        description: "Animación para mostrar modal con escala desde centro-izquierdo",
+        defaultParams: {
+            duration: 0.3,
+            ease: "power2.out"
+        },
+        requiredParams: []
+    },
+    modalHide: {
+        name: "modalHide",
+        description: "Animación para ocultar modal con escala hacia centro-izquierdo",
+        defaultParams: {
+            duration: 0.25,
+            ease: "power2.in"
+        },
+        requiredParams: []
+    },
+    modalElementEnter: {
+        name: "modalElementEnter",
+        description: "Animación de entrada para elementos del modal (fade + slide)",
+        defaultParams: {
+            duration: 0.2,
+            ease: "power2.out"
+        },
+        requiredParams: []
+    },
+    nodeIdle: {
+        name: "nodeIdle",
+        description: "Animación idle para el nodo - movimiento sutil hacia la izquierda",
+        defaultParams: {
+            offsetX: -0.2,
+            duration: 1.5,
+            ease: "power2.inOut"
+        },
+        requiredParams: []
     }
 };
 
@@ -163,5 +284,9 @@ export const defaultAnimationsMetadata: Record<string, AnimationMetadata> = {
 export const defaultAnimations: Record<string, AnimationHandler> = {
     pendulum: pendulumAnimation,
     rotate: rotateAnimation,
-    rotateTo: rotateToAnimation
+    rotateTo: rotateToAnimation,
+    modalShow: modalShowAnimation,
+    modalHide: modalHideAnimation,
+    modalElementEnter: modalElementEnterAnimation,
+    nodeIdle: nodeIdleAnimation
 };

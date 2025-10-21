@@ -16,8 +16,8 @@ import { Node } from "../entities/Node";
  * handleObjectEvent('click', objectId, eventData);
  */
 export function useHandlers() {
-    const services = useEngineCore();
-    const animationService = services.getAnimationService();
+    const core = useEngineCore();
+    const animationService = core.getAnimationService();
 
     // Estado para controlar si hay una animación de navegación en curso
     const isNavigationAnimating = useRef(false);
@@ -79,6 +79,12 @@ export function useHandlers() {
         const group = event.target.getGroup();
         if (!group) {
             console.warn("No se pudo obtener el grupo del nodo");
+            return;
+        }
+
+        // Verificar si animationService está disponible
+        if (!animationService) {
+            console.warn("AnimationService no está disponible");
             return;
         }
 
@@ -152,9 +158,10 @@ export function useHandlers() {
     */
     const handleNextNode = useCallback(() => {
         // Prevenir múltiples animaciones simultáneas
+        console.log("ejecutando animacion")
         if (isNavigationAnimating.current) return;
 
-        const activeNode = services.activeNode;
+        const activeNode = core.activeNode;
         const group = activeNode?.getGroup();
 
         if (!group || !animationService) {
@@ -173,17 +180,7 @@ export function useHandlers() {
         const blobMesh = nodeGroup?.children.find((child: THREE.Object3D) => child.name === "blob") as THREE.Mesh;
         const material = blobMesh?.material as THREE.ShaderMaterial;
 
-        // Debug: verificar si encontramos los uniforms
-        console.log("🔍 Debug uniforms (next):", {
-            groupChildren: group.children.length,
-            nodeGroupExists: !!nodeGroup,
-            blobMeshExists: !!blobMesh,
-            materialExists: !!material,
-            uniformsExists: !!material?.uniforms,
-            uSmokeDirectionOffset: material?.uniforms?.uSmokeDirectionOffset?.value,
-            uSmokeDirection: material?.uniforms?.uSmokeDirection?.value,
-            uSmokeTurbulence: material?.uniforms?.uSmokeTurbulence?.value
-        });
+
 
         // Crear timeline para la animación compleja
         const timeline = animationService.createCustomTimeline();
@@ -191,20 +188,19 @@ export function useHandlers() {
         timeline
             // Fase 1: Salir hacia arriba con movimiento senoidal lateral + uniforms
             ?.to(group.position, {
-                y: originalY + 6, // Sale por arriba
-                duration: 2.,
-                ease: "back.in(.4)",
+                y: originalY + 3, // Sale por arriba
+                duration: 1.,
+                ease: "back.in(.2)",
                 onUpdate: function () {
                     // Crear movimiento senoidal en X mientras sube
                     const progress = this.progress(); // 0 a 1
-                    const sineWave = Math.sin(progress * Math.PI * 3) * 0.1; // 3 oscilaciones completas
+                    const sineWave = Math.sin(progress * Math.PI * 2) * 0.1; // 3 oscilaciones completas
                     group.position.x = originalX + sineWave;
                 }
             });
 
         // Animar uniforms durante la salida (en paralelo)
         if (material?.uniforms?.uSmokeDirectionOffset && material?.uniforms?.uSmokeTurbulence) {
-            console.log("✅ Animando uniforms durante salida (next)");
 
             timeline
                 ?.to(material.uniforms.uSmokeDirectionOffset, {
@@ -222,14 +218,14 @@ export function useHandlers() {
         } timeline
             // Fase 2: Teleportar instantáneamente abajo (fuera de vista)
             ?.set(group.position, {
-                y: originalY - 6, // Aparece por debajo
+                y: originalY - 3, // Aparece por debajo
                 x: originalX // Vuelve al centro en X
             })
             // Fase 3: Entrar desde abajo (más suave)
             .to(group.position, {
                 y: originalY, // Vuelve a posición original
-                duration: 1.6,
-                ease: "back.out(.6)",
+                duration: .7,
+                ease: "back.out(.9)",
                 onComplete: () => {
                     // Liberar el flag cuando termine la animación
                     isNavigationAnimating.current = false;
@@ -256,7 +252,7 @@ export function useHandlers() {
         }
 
         timeline?.play();
-    }, [animationService, services]);
+    }, [animationService, core]);
 
     /**
      * Handler para animación al nodo anterior
@@ -271,7 +267,7 @@ export function useHandlers() {
 
         console.log(`🎬 Iniciando animación prev desde nodo: ${nodeId}`);
 
-        const activeNode = services.activeNode;
+        const activeNode = core.activeNode;
         const group = activeNode?.getGroup();
 
         if (!group || !animationService) {
@@ -386,7 +382,7 @@ export function useHandlers() {
         }
 
         timeline?.play();
-    }, [animationService, services]);
+    }, [animationService, core]);
 
     return { onObjectsEnter, onObjectsLeave, onObjectsClick, onNodeClick, onNodeEnter, onNodeLeave, handleNextNode, handlePrevNode };
 }

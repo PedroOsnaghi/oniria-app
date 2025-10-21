@@ -24,99 +24,68 @@ export interface LoaderSystemProps {
  * Loader por defecto con interfaz visual para estados de carga.
  */
 function DefaultLoader({ progress, isLoading, error }: LoaderProps) {
-  // Solo mostrar si está cargando o hay error
-  if (!isLoading && !error) return null;
+  const [shouldHide, setShouldHide] = useState(false);
+
+  useEffect(() => {
+    if (!isLoading && !error && progress >= 100) {
+      // Cuando la carga se completa, esperar un poco y luego activar desvanecimiento
+      const timer = setTimeout(() => {
+        setShouldHide(true);
+      }, 200); // Delay de 200ms después de llegar a 100%
+
+      return () => clearTimeout(timer);
+    } else if (isLoading || error) {
+      // Si vuelve a cargar o hay error, resetear estado
+      setShouldHide(false);
+    }
+  }, [isLoading, error, progress]);
+
+  // No renderizar si ya se desvaneció completamente
+  if (shouldHide && !isLoading && !error) {
+    return (
+      <div className="absolute inset-0 bg-black/95 flex items-center justify-center z-[999999] text-white font-sans opacity-0 pointer-events-none transition-opacity duration-300" />
+    );
+  }
 
   return (
     <div
-      style={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-        backgroundColor: "rgba(0, 0, 0, 0.95)",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        zIndex: 999999,
-        color: "white",
-        fontFamily: "system-ui, -apple-system, sans-serif",
-        transition: "opacity 0.3s ease",
-        opacity: isLoading ? 1 : 0,
-      }}
+      className={`
+        absolute inset-0 bg-black/95 flex flex-col items-center justify-center z-[999999] 
+        text-white font-sans transition-all duration-300 ease-out delay-75
+        ${
+          shouldHide
+            ? "opacity-0 scale-95 pointer-events-none"
+            : "opacity-100 scale-100 pointer-events-auto"
+        }
+      `}
     >
       {error ? (
-        <div style={{ textAlign: "center" }}>
-          <div
-            style={{ fontSize: "24px", marginBottom: "16px", color: "#ff6b6b" }}
-          >
-            ⚠️ Error de Carga
-          </div>
-          <div
-            style={{ fontSize: "16px", marginBottom: "24px", color: "#ccc" }}
-          >
-            {error}
-          </div>
+        <div className="text-center">
+          <div className="text-2xl mb-4 text-red-400">⚠️ Error de Carga</div>
+          <div className="text-base mb-6 text-gray-300">{error}</div>
           <button
             onClick={() => window.location.reload()}
-            style={{
-              padding: "12px 24px",
-              backgroundColor: "var(--color-primary)",
-              color: "white",
-              border: "none",
-              borderRadius: "8px",
-              fontSize: "16px",
-              cursor: "pointer",
-            }}
+            className="px-6 py-3 bg-[var(--color-primary)] text-white border-0 rounded-lg text-base cursor-pointer hover:bg-[var(--color-primary-dark)] transition-colors"
           >
             Reintentar
           </button>
         </div>
       ) : (
-        <div style={{ textAlign: "center" }}>
+        <div className="text-center">
           {/* Spinner */}
-          <div
-            style={{
-              width: "48px",
-              height: "48px",
-              border: "4px solid rgba(255, 255, 255, 0.2)",
-              borderTop: "4px solid var(--color-primary)",
-              borderRadius: "50%",
-              animation: "LoaderSpin 1s linear infinite",
-              marginBottom: "24px",
-              margin: "0 auto 24px auto",
-            }}
-          />
+          <div className="w-12 h-12 border-4 border-white/20 border-t-[var(--color-primary)] rounded-full mx-auto mb-6 animate-spin" />
 
-          <div style={{ fontSize: "20px", marginBottom: "16px" }}>
-            Cargando experiencia 3D...
-          </div>
+          <div className="text-xl mb-4">Cargando experiencia 3D...</div>
 
           {/* Progress bar */}
-          <div
-            style={{
-              width: "240px",
-              height: "4px",
-              backgroundColor: "rgba(255, 255, 255, 0.2)",
-              borderRadius: "2px",
-              overflow: "hidden",
-              marginBottom: "12px",
-            }}
-          >
+          <div className="w-60 h-1 bg-white/20 rounded-sm overflow-hidden mb-3">
             <div
-              style={{
-                width: `${progress}%`,
-                height: "100%",
-                backgroundColor: "var(--color-primary)",
-                borderRadius: "2px",
-                transition: "width 0.3s ease",
-              }}
+              className="h-full bg-[var(--color-primary)] rounded-sm transition-all duration-300 ease-out"
+              style={{ width: `${progress}%` }}
             />
           </div>
 
-          <div style={{ fontSize: "16px", color: "#ccc" }}>
+          <div className="text-base text-gray-300">
             {Math.round(progress)}% completado
           </div>
         </div>
@@ -156,6 +125,11 @@ export default function LoaderSystem({
         @keyframes LoaderSpin {
           0% { transform: rotate(0deg); }
           100% { transform: rotate(360deg); }
+        }
+        @keyframes LoaderPulse {
+          0% { transform: scale(1); opacity: 1; }
+          50% { transform: scale(1.1); opacity: 0.8; }
+          100% { transform: scale(1); opacity: 1; }
         }
       `;
       document.head.appendChild(style);

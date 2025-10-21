@@ -35,6 +35,15 @@ export function useTransitions() {
         );
     }, [cameraService, activeRoom]);
 
+    const viewReset = useCallback(() => {
+        if (!cameraService) return;
 
-    return { viewNodes };
+        // Siempre resetear a posición inicial
+        // La lógica anterior era para evitar interferencias con portales,
+        // pero eso se maneja mejor en el CameraSystem con la configuración
+        cameraService.resetInitialPosition();
+
+    }, [cameraService]);
+
+    return { viewNodes, viewReset };
 }

@@ -1,6 +1,5 @@
 import { useHistoryPanel } from "@/app/features/history/hooks/useHistoryPanel";
 import type { TimelineItem } from "@/app/features/history/model/TimelineItem";
-import SidebarHeader from "../../history/components/SidebarHeader";
 import Card from "@/shared/components/Card";
 import { TimelineProgressBar } from "@/app/features/history/timeLine/TimelineProgressBar";
 import { TimelineList } from "@/app/features/history/timeLine/TimelineList";
@@ -19,6 +18,8 @@ import type { HistoryFilters } from "@/app/features/history/model/types";
 import { useCallback, useState } from "react";
 import SkeletonHistory from "../../history/components/Skeleton";
 import { useNavigate } from "react-router-dom";
+import "@/index.css";
+import { useEngineStore } from "@/engine/core";
 import SparklesIcon from "@/assets/icons/SparklesIcon";
 
 type HistoryVariantProps = {
@@ -53,14 +54,25 @@ type HomeVariantProps = {
 type UnifiedSidePanelProps = HistoryVariantProps | HomeVariantProps;
 
 function HistoryPanel(props: HistoryVariantProps) {
-  const { title, description, ctaText, timeline, loading = false, onChangeFilters } = props;
+  const {
+    title,
+    description,
+    ctaText,
+    timeline,
+    loading = false,
+    onChangeFilters,
+  } = props;
   const navigate = useNavigate();
+  const { setDream } = useEngineStore();
 
-  const handleEmotionChange = useCallback((emotions: string[]) => {
-    onChangeFilters?.({
-      emotion: emotions.length ? emotions : undefined,
-    });
-  }, [onChangeFilters]);
+  const handleEmotionChange = useCallback(
+    (emotions: string[]) => {
+      onChangeFilters?.({
+        emotion: emotions.length ? emotions : undefined,
+      });
+    },
+    [onChangeFilters]
+  );
 
   const {
     items,
@@ -82,6 +94,7 @@ function HistoryPanel(props: HistoryVariantProps) {
   });
 
   const onBackHome = () => {
+    setDream(null);
     navigate("/home");
   };
 
@@ -92,7 +105,8 @@ function HistoryPanel(props: HistoryVariantProps) {
     >
       <BackButton onClick={onBackHome} />
       <Card.Root className="flex flex-col h-full justify-between p-6 sm:p-6">
-        <SidebarHeader title={title} description={description} />
+        <Card.Title>{title}</Card.Title>
+        <Card.Description>{description}</Card.Description>
 
         <EmotionFilter
           items={timeline}
@@ -101,11 +115,11 @@ function HistoryPanel(props: HistoryVariantProps) {
           className="sticky top-0 z-10 bg-transparent pt-1 mb-8"
         />
 
-        <div className="relative flex-1 overflow-y-auto pr-2 min-h-[400px]">
+        <div className="relative flex-1 overflow-y-scroll pr-2 overflow-x-hidden scrollbar">
           <TimelineProgressBar progress={progress} height={barHeight} />
           {loading ? (
-            <div className="h-full">
-              <SkeletonHistory withLine={false} />
+            <div className="overflow-y-hidden overflow-x-hidden">
+              <SkeletonHistory />
             </div>
           ) : items.length === 0 ? (
             <div className="flex items-center justify-center h-full">
@@ -172,7 +186,10 @@ function HomePanel(props: HomeVariantProps) {
     await handleInterpret();
   };
 
-  const onBackHome = () => setExpanded(false);
+  const onBackHome = () => {
+    setExpanded(false);
+    props.onBackHome?.();
+  };
 
   return (
     <Card.Container
@@ -288,7 +305,7 @@ function HomePanel(props: HomeVariantProps) {
 
 export default function UnifiedSidePanel(props: UnifiedSidePanelProps) {
   return props.variant === "history" ? (
-    <HistoryPanel {...props} />
+    <HistoryPanel {...props} scrollable={false} />
   ) : (
     <HomePanel {...props} />
   );

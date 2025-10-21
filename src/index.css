@@ -11,7 +11,15 @@
     height: 100%;
     display: block;
     border-radius: 15px;
-    background-color: black;
+    background-color: black !important;
+    /* Evitar flash blanco durante inicialización */
+    opacity: 1;
+    transition: opacity 0.1s ease-in-out;
+}
+
+/* Asegurar que el canvas siempre tenga fondo negro */
+.canvas-webgl canvas {
+    background-color: black !important;
 }
 
 @theme {
@@ -191,5 +199,11 @@
   &::-webkit-scrollbar-thumb:hover {
     background-color: rgb(107 114 128); /* gray-500 */
   }
+}
+
+/* Animación para el cursor de typing */
+@keyframes blinkCursor {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
 }
 

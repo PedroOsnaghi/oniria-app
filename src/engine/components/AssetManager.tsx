@@ -173,7 +173,7 @@ export default function AssetManager({
       });
       onLoadedRef.current?.(organizedAssets);
     } catch (error) {
-      console.error("❌ AssetManager: Error durante la carga:", error);
+      console.error("AssetManager: Error durante la carga:", error);
       const errorMessage =
         error instanceof Error ? error.message : "Error desconocido";
       onErrorRef.current?.(errorMessage);

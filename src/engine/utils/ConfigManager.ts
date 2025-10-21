@@ -190,7 +190,6 @@ export class ConfigManager {
     private extractInteractableObjects(config: RoomConfig, scene: THREE.Group<THREE.Object3DEventMap>): Record<string, ObjectEventArray> {
         const interactables: Record<string, ObjectEventArray> = {};
 
-
         for (const [name, obj] of Object.entries(config.objects)) {
 
             if (obj.interceptable && obj.event) {
@@ -201,9 +200,7 @@ export class ConfigManager {
             }
         }
 
-
         const mapped = this.mapHandlersToChildObjects(scene, interactables);
-
 
         return mapped;
     }

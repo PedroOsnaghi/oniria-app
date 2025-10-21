@@ -18,7 +18,7 @@ export function DefaultEngineIndicator() {
   });
 
   return (
-    <mesh ref={meshRef} position={[0, 1.8, 0]}>
+    <mesh ref={meshRef} position={[0, 0, 0]}>
       <boxGeometry args={[1, 1, 1]} />
       <meshStandardMaterial color="#9333ea" /> {/* Violeta */}
       {/* Luz ambiente para iluminar el cubo */}

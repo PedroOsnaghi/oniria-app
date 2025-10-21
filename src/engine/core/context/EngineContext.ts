@@ -30,6 +30,8 @@ export interface EngineCoreAPI {
   setEngineState: (_state: EngineState) => void;
   unregisterService: (_name: string) => void;
   registerService: (_name: string, _service: unknown) => void;
+  registerApiAction: (_actionName: string, _actionHandler: any) => void;
+  unregisterApiAction: (_actionName: string) => void;
   registerRoom: (_roomId: string, _skinId: string) => void;
   registerNode: (
     _nodeId: string,

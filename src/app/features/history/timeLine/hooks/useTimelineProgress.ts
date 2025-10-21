@@ -35,7 +35,7 @@ export function useTimelineProgress({ listRef, itemRefs, items, selectedId }: Us
                 const selectedItem = itemRefs.current.get(selectedId);
                 if (selectedItem) {
                     const selectedRect = selectedItem.getBoundingClientRect();
-                    const progressDistance = selectedRect.top - firstRect.top;
+                    const progressDistance = selectedRect.top - firstRect.top + 20;
                     const progressPercent = Math.max(0, Math.min(1, progressDistance / totalHeight));
                     setProgress(progressPercent);
                 }

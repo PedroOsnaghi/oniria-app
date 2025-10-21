@@ -15,6 +15,8 @@ import { useEffect } from "react";
 import HeaderContainer from "@/shared/components/users/HeaderContainer";
 import useDreams from "@/app/features/dreams/hooks/useDreams";
 import UnifiedSidePanel from "./components/Panel";
+import HudSystem from "@/engine/systems/hud/HudSystem";
+import type { Dream } from "@/engine/core/store/engineStore";
 
 export default function Home() {
   //const { t } = useTranslation();
@@ -32,23 +34,26 @@ export default function Home() {
     engine.setRoom(roomId, skinId);
   }, []);
 
+  const handleBackHome = () => {
+    engine.actions?.viewReset?.();
+  };
+
   const hoverHandler = (args: any) => {
     console.log("hovered", args.objectName || args);
   };
 
   const handleInterpretar = async (dream: string) => {
-    const response = await fetchDreams(dream);
+    console.log("handleInterpretar iniciado con dream:", dream);
+    engine.actions.viewNodes?.();
 
-    console.log("dreams:", response);
+    setTimeout(async () => {
+      const response = await fetchDreams(dream);
+      engine.setDream(response as Dream);
+    }, 500);
+
     //navegar a otra pagina con el resultado
     //navigate("/interpretacion");
   };
-  const canvasBg =
-    typeof window !== "undefined"
-      ? getComputedStyle(document.documentElement)
-          .getPropertyValue("--canvas-bg")
-          .trim() || "#000000"
-      : "#000000";
 
   return (
     <div
@@ -65,6 +70,7 @@ export default function Home() {
       <main className="container relative z-0 mx-auto grid grid-cols-12 gap-4 flex-1 min-h-0 pb-4">
         <UnifiedSidePanel
           variant="home"
+          onBackHome={handleBackHome}
           onNewQuote={() => engine.node?.next()}
           onInterpret={handleInterpretar}
           scrollable
@@ -72,10 +78,16 @@ export default function Home() {
 
         {/* Canvas 3d */}
         <Card.Container className="col-span-12 sm:col-span-9 rounded-2xl border backdrop-blur-md p-5 md:p-4 overflow-hidden relative">
+          <HudSystem />
           <LoaderSystem />
 
           {roomId && skinId && (
-            <Engine.Canvas engineSettings={{ backgroundColor: canvasBg }}>
+            <Engine.Canvas
+              engineSettings={{
+                backgroundColor: "#000000",
+                cameraInitialPosition: [-2, 8, 3],
+              }}
+            >
               <Engine.Core>
                 <DebugSystem enabled={true} />
                 <InteractionSystem onObjectHoverEnter={hoverHandler} />

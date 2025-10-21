@@ -10,7 +10,7 @@ export function useTimelineData(filters?: HistoryFilters, pagination?: HistoryPa
     const [error, setError] = useState<string | null>(null);
     const { fetchHistory } = useHistory();
 
-    const stableFilters = useMemo(() => filters, [JSON.stringify(filters)]);
+    const stableFilters = useMemo(() => filters, [JSON.stringify(filters),]);
     const stablePagination = useMemo(() => pagination, [JSON.stringify(pagination)]);
 
     useEffect(() => {

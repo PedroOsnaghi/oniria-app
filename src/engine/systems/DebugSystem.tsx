@@ -61,6 +61,7 @@ export default function DebugSystem({
 function EngineDebugPanel() {
   const core = useEngineCore();
   const { activeRoom, engineState } = core;
+  const { dreamModalVisible, setDreamModalVisible } = useEngineStore();
 
   // Crear un objeto de controles que se actualice reactivamente
   const controls = React.useMemo(
@@ -80,6 +81,21 @@ function EngineDebugPanel() {
         disabled: true,
         label: "Loop Status",
       },
+      "--- Actions ---": { value: "", disabled: true },
+      openDreamModal: button(() => {
+        console.log("🎬 Opening Dream Modal...");
+        setDreamModalVisible(true);
+      }),
+      closeDreamModal: button(() => {
+        console.log("🎬 Closing Dream Modal...");
+        setDreamModalVisible(false);
+      }),
+      dreamModalStatus: {
+        value: dreamModalVisible ? "Visible" : "Hidden",
+        disabled: true,
+        label: "Dream Modal",
+      },
+      "--- Debug ---": { value: "", disabled: true },
       restartEngine: button(() => {
         console.log("🔄 Restarting engine...");
       }),
@@ -88,17 +104,22 @@ function EngineDebugPanel() {
           room: activeRoom?.constructor.name,
           engineState: engineState,
           scene: activeRoom?.getScene()?.children.length,
+          dreamModal: dreamModalVisible,
           timestamp: Date.now(),
         };
         console.log("📤 Engine State:", state);
       }),
     }),
-    [engineState, activeRoom]
+    [engineState, activeRoom, dreamModalVisible, setDreamModalVisible]
   );
 
   console.log(controls);
 
-  useControls("🔧 Engine", controls, [engineState, activeRoom]);
+  useControls("🔧 Engine", controls, [
+    engineState,
+    activeRoom,
+    dreamModalVisible,
+  ]);
 
   return null;
 }

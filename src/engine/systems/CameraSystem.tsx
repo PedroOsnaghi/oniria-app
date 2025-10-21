@@ -3,6 +3,7 @@ import { useEffect } from "react";
 
 import { useEngineCore } from "@engine/core";
 import { EngineState } from "@engine/core/";
+import { useTransitions } from "@engine/hooks/useTransitions";
 
 import { type CameraConfig } from "@engine/services/CameraService";
 
@@ -18,6 +19,14 @@ export interface CameraSystemProps {
 /**
  * Sistema de cámara del motor 3D.
  * Gestiona la configuración y controles de la cámara para la exploración de la escena.
+ *
+ * @param config Configuración inicial de la cámara
+ * @param onCameraMove Callback cuando la cámara se mueve
+ * @param onCameraStop Callback cuando la cámara deja de moverse
+ * @param onZoomChange Callback cuando cambia el zoom (distancia)
+ * @param enableControls Habilita o deshabilita los controles de la cámara
+ * @param autoConfigureForRoom Si es true, configura automáticamente la cámara para la sala activa
+ * @returns Componente React que no renderiza nada pero gestiona la cámara
  */
 export default function CameraSystem({
   config,
@@ -28,11 +37,41 @@ export default function CameraSystem({
   autoConfigureForRoom = true,
 }: CameraSystemProps) {
   const core = useEngineCore();
-  const { loopService, activeRoom, engineState } = core;
+  const {
+    loopService,
+    activeRoom,
+    engineState,
+    registerApiAction,
+    unregisterApiAction,
+  } = core;
   const cameraService = core.getCameraService();
+  const { viewNodes, viewReset } = useTransitions();
 
   // Solo funcionar cuando el engine esté listo
   const isEngineReady = engineState === EngineState.READY;
+
+  // Registrar acciones en la API del motor
+  useEffect(() => {
+    if (!isEngineReady) return;
+
+    // Registrar la acción viewNodes
+    registerApiAction("viewNodes", viewNodes);
+
+    // Registrar la acción viewReset
+    registerApiAction("viewReset", viewReset);
+
+    // Cleanup al desmontar
+    return () => {
+      unregisterApiAction("viewNodes");
+      unregisterApiAction("viewReset");
+    };
+  }, [
+    isEngineReady,
+    registerApiAction,
+    unregisterApiAction,
+    viewNodes,
+    viewReset,
+  ]);
 
   // Suscripción al loop para updates
   useEffect(() => {
@@ -91,7 +130,7 @@ export default function CameraSystem({
     const defaultConfig: CameraConfig = {
       minDistance: 3,
       maxDistance: 6,
-      position: new THREE.Vector3(-3.5, 3, 6),
+      position: new THREE.Vector3(-4, 3, 4),
       target: new THREE.Vector3(0, 1.8, 0),
       smoothTime: 0.5,
       maxPolarAngle: Math.PI / 2,
