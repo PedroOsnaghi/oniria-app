@@ -49,6 +49,7 @@ type HomeVariantProps = {
   loadingQuote?: boolean;
   showQuoteCard?: boolean;
   scrollable?: boolean;
+  onBackHome?: () => void;
 };
 
 type UnifiedSidePanelProps = HistoryVariantProps | HomeVariantProps;
