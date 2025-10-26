@@ -2,7 +2,8 @@
   "home": {
     "link": "Inicio",
     "title": "Bienvenido a Oniria",
-    "description": "Explora el mundo de los sueños con Oniria."
+    "description": "Explora el mundo de los sueños con Oniria.",
+    "likeApp": "¿Te gusta la app?"
   },
   "login": {
     "link": "Iniciá sesión",

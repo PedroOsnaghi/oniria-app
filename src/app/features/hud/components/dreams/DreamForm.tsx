@@ -55,12 +55,10 @@ export default function DreamForm({
 
         <HudMenu.Body>
           <h2 className="text-sm">
-            Hola {user?.user_metadata.full_name ?? "Invitado"}, ¿Qué imágenes
-            quedaron de tu sueño?
+            {t("node.portal.saludo")} {user?.user_metadata.full_name ?? "Invitado"}, {t("node.portal.saludoDos")}
           </h2>
           <p className="text-xs text-text-muted">
-            Escribí libremente, sin preocuparte por el orden. Oniria se
-            encargará de interpretarlo.
+            {t("node.portal.description")}
           </p>
           <DreamTextarea
             ref={dreamRef}
@@ -78,9 +76,8 @@ export default function DreamForm({
             className="modal-button"
           >
             <span
-              className={`flex items-center gap-2 text-light ${
-                isEmpty || isTooLong || loading ? "opacity-80" : "opacity-100"
-              }`}
+              className={`flex items-center gap-2 text-light ${isEmpty || isTooLong || loading ? "opacity-80" : "opacity-100"
+                }`}
             >
               {loading ? (
                 <Icon name="spinner" className="text-xs w-5 h-5 animate-spin" />
@@ -93,10 +90,7 @@ export default function DreamForm({
         </HudMenu.Footer>
       </HudMenu.Container>
       <HudMenu.Description className="text-sm max-w-sm">
-        Estás en la Vitácora Onírica, el lugar donde los sueños toman forma.
-        Cada palabra que escribas deja una huella en tu mapa interior,
-        conectando recuerdos, símbolos y emociones. Este es tu espacio para
-        registrar lo que el subconsciente te mostró mientras dormías.
+        {t("node.portal.descriptionPanel")}
       </HudMenu.Description>
     </HudMenu.Root>
   );

@@ -9,6 +9,7 @@ import { useEngineStore } from "@/engine";
 import useDreamService from "./hooks/useDreamService";
 import { useEngineAPI } from "../../../../../engine/core/context/EngineApiProvider";
 import { downloadUrlAsFile, suggestFilename } from "./DownloadHanlde";
+import { useTranslation } from "react-i18next";
 
 interface DreamManagerProps {
   visibility?: boolean;
@@ -39,6 +40,7 @@ export default function DreamManager({
   const [showCloseBadge, setShowCloseBadge] = useState(false);
   const hasInitialized = useRef(false); // Para controlar la primera animación
   const engine = useEngineAPI();
+  const { t } = useTranslation();
 
   const startTypingAnimation = useCallback(
     (fullText: string, speed: number) => {
@@ -218,10 +220,10 @@ export default function DreamManager({
           {/* Badge para confirmar cierre sin guardar */}
           {showCloseBadge && (
             <Badge
-              message="¿Estás seguro de cerrar sin guardar la interpretación?"
+              message={t("node.portal.tassSeguro")}
               variant="warning"
-              confirmText="Cerrar sin guardar"
-              cancelText="Cancelar"
+              confirmText={t("node.portal.cerrarG")}
+              cancelText={t("node.portal.cancelar")}
               onConfirm={handleConfirmClose}
               onCancel={handleCancelClose}
             />
@@ -231,21 +233,21 @@ export default function DreamManager({
           <Badge
             title={
               saveState === "saved" && imageState === "generated"
-                ? "¡Tu imagen ya está lista!"
+                ? t("node.panelImage.imagenLista")
                 : saveState === "saved" && imageState === "generating"
-                  ? "Generando tu imagen..."
+                  ? t("node.panelImage.generandoImagen")
                   : saveState === "saved"
                     ? "¡Interpretación guardada!"
-                    : "Nueva funcionalidad"
+                    : t("node.panelImage.title")
             }
             message={
               saveState === "saved" && imageState === "generated"
-                ? "Tu interpretación ha sido transformada en una imagen única."
+                ? t("node.panelImage.imagenTransform")
                 : saveState === "saved" && imageState === "generating"
-                  ? "Estamos creando una imagen visual de tu sueño. Esto puede tomar unos momentos..."
+                  ? t("node.panelImage.imagenVisual")
                   : saveState === "saved"
-                    ? "Tu interpretación ha sido transformada en una experiencia visual única."
-                    : "¿Sabías que ahora nuestra IA te genera una imagen de la interpretación para que tus sueños puedan cobrar aún más vida?"
+                    ? t("node.panelImage.tranformacionUnica")
+                    : t("node.panelImage.description")
             }
             variant="feature"
             linkText={saveState !== "saved" ? "Saber más" : undefined}
@@ -261,11 +263,11 @@ export default function DreamManager({
             }
             confirmText={
               saveState === "saved" && imageState === "idle"
-                ? "Generar imagen"
+                ? t("node.panelImage.generarImagen")
                 : saveState === "saved" && imageState === "generating"
-                  ? "Generando..."
+                  ? t("node.panelImage.generandoImagen")
                   : saveState === "saved" && imageState === "generated"
-                    ? "Descargar imagen"
+                    ? t("node.panelImage.download")
                     : undefined
             }
             onConfirm={
