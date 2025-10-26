@@ -5,7 +5,7 @@ import { useEngineCore } from "@engine/core";
 import { useEngineStore } from "@engine/core/store/engineStore";
 import type { ObjectEventArray } from "@engine/config/room.type";
 import {
-  objectsDescriptions,
+  useObjectsDescriptions,
   type BadgeData,
 } from "@/app/features/hud/components/badges/badgeStore";
 
@@ -36,6 +36,7 @@ export function Badges({ badgeComponent, badgeComponentProps }: BadgesProps) {
   const [object, setObject] = useState<BadgeData | null>(null);
   const [position, setPosition] = useState<[number, number, number]>([0, 0, 0]);
   const [visible, setVisible] = useState(false);
+  const objectsDescriptions = useObjectsDescriptions();
 
   const handleBadgeClick = useCallback(() => {
     console.log("[Badge] Clicked");

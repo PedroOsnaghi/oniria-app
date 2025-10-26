@@ -55,12 +55,6 @@ export default function LanguageToggle() {
                 >
                     {isEs ? "Español" : "English"}
                 </div>
-                <div
-                    className="text-[10px] transition-colors duration-200"
-                    style={{ color: "var(--user-text-muted)" }}
-                >
-                    {isEs ? "Cambiar a EN" : "Switch to ES"}
-                </div>
             </div>
         </div>
     );

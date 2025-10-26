@@ -386,3 +386,15 @@
 .modal-button:active {
     transform: scale(0.98);
 }
+
+/*boton like*/
+@keyframes heart-pop {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.45); }
+    60% { transform: scale(0.9); }
+    100% { transform: scale(1); }
+}
+
+.animate-heart-pop {
+    animation: heart-pop 0.3s ease;
+}
