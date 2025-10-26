@@ -3,9 +3,11 @@ import menuFactory from "../menuFactory";
 import { useEngineAPI } from "@/engine/core/context/EngineApiProvider";
 import { useEngineStore } from "@/engine";
 import type { MenuProps } from "../../../types/menu.types";
+import { useTranslation } from "react-i18next";
 
 export default function MenuSetting({ onClose, isClosing = false }: MenuProps) {
-  const menu = menuFactory.monitor;
+  const { t } = useTranslation();
+  const menu = menuFactory(t).monitor;
   const engine = useEngineAPI();
   const { closeMenu } = useEngineStore();
 

@@ -49,7 +49,6 @@
     "salir": "Salir"
   },
   "node": {
-    "title": "¿Qué soñaste?",
     "descriptionLabel": "Descubri el significado de tus sueños con nuestra IA.",
     "placeholderNode": "Hoy soñe …",
     "character1": "Te pasaste del máximo de ",
@@ -69,11 +68,24 @@
     "interpretando": "Interpretando...",
     "menu": {
       "portal": "El Portal",
+      "labelPortal": "¿Qué soñaste?",
       "descriptionPortal": "Acá podés registrar tus sueños, explorar tu historial y descubrir los patrones que habitan en tu mente.",
       "descriptPortalPanel": "El Portal de los Sueños es el punto de acceso a tu universo interior. Desde aquí podés registrar un sueño, interpretarlo o explorar tu historia onírica. Cada elección abre un nuevo camino dentro de tu mente.",
       "oniriaAiFunction": "Oniria AI te dará una interpretación simbólica de tu sueño.",
       "historialLabel": "Mi historia onírica",
-      "historialDescription": "Accede a tu diario de sueños y explora las interpretaciones pasadas."
+      "historialDescription": "Accede a tu diario de sueños y explora las interpretaciones pasadas.",
+      "monitor": {
+        "title": "Centro de control",
+        "description": "Ajusta las preferencias de la aplicación y personaliza tu experiencia.",
+        "items": {
+          "labelPerfil": "Perfil",
+          "descPerfil": "Gestiona tu perfil y preferencias personales.",
+          "labelNotificaciones": "Notificaciones",
+          "descNotificaciones": "Configura tus preferencias de notificación.",
+          "labelPersonalizacion": "Personalización",
+          "descPersonalizacion": "Personaliza tu habitación."
+        }
+      }
     },
     "portal": {
       "saludo": "Hola ",

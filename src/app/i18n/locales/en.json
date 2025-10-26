@@ -50,7 +50,6 @@
     "salir": "Exit"
   },
   "node": {
-    "title": "What did you dream?",
     "descriptionLabel": "Write your dream",
     "placeholderNode": "Write your dream here…",
     "character1": "You exceeded the maximum of ",
@@ -69,11 +68,24 @@
     "interpretando": "Interpreting...",
     "menu": {
       "portal": "The Portal",
+      "labelPortal": "What did you dream?",
       "descriptionPortal": "Here you can record your dreams, explore your history, and discover the patterns that inhabit your mind.",
       "descriptPortalPanel": "The Dream Portal is the gateway to your inner universe. From here you can record a dream, interpret it, or explore your dream history. Each choice opens a new path within your mind.",
       "oniriaAiFunction": "Oniria AI will give you a symbolic interpretation of your dream.",
       "historialLabel": "My Dream History",
-      "historialDescription": "Access your dream journal and explore past interpretations."
+      "historialDescription": "Access your dream journal and explore past interpretations.",
+      "monitor": {
+        "title": "Control Center",
+        "description": "Adjust application preferences and customize your experience.",
+        "items": {
+          "labelPerfil": "Profile",
+          "descPerfil": "Manage your profile and personal preferences.",
+          "labelNotificaciones": "Notifications",
+          "descNotificaciones": "Set your notification preferences.",
+          "labelPersonalizacion": "Customization",
+          "descPersonalizacion": "Customize your room."
+        }
+      }
     },
     "portal": {
       "saludo": "Hello ",

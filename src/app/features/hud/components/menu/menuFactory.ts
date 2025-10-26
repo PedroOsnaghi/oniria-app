@@ -1,48 +1,48 @@
+import type { TFunction } from "i18next";
 import type { MenuFactory } from "../../types/menu.types";
 
-
-const menuFactory: MenuFactory = {
+const menuFactory = (t: TFunction): MenuFactory => ({
     portal: {
-        title: "El Portal",
-        description: "El Portal de los Sueños es el punto de acceso a tu universo interior. Desde aquí podés registrar un sueño, interpretarlo o explorar tu historia onírica. Cada elección abre un nuevo camino dentro de tu mente.",
+        title: t("node.menu.portal"),
+        description: t("node.menu.descriptPortalPanel"),
         icon: undefined,
         items: [
             {
-                label: "¿Qué soñaste?",
+                label: t("node.menu.labelPortal"),
                 icon: "dreamJournal",
-                description: "Oniria AI te dará una interpretación simbólica de tu sueño. ",
+                description: t("node.menu.oniriaAiFunction"),
                 action: () => { }
             }, {
-                label: "Mi historia onírica",
+                label: t("node.menu.historialLabel"),
                 icon: "nodeJournal",
-                description: "Accede a tu diario de sueños y explora las interpretaciones pasadas.",
+                description: t("node.menu.historialDescription"),
                 action: () => { }
             }
         ]
     },
     monitor: {
-        title: "Centro de control",
-        description: "Ajusta las preferencias de la aplicación y personaliza tu experiencia.",
+        title: t("node.menu.monitor.title"),
+        description: t("node.menu.monitor.description"),
         icon: undefined,
         items: [
             {
-                label: "Perfil",
+                label: t("node.menu.monitor.items.labelPerfil"),
                 icon: "user",
-                description: "Gestiona tu perfil y preferencias personales.",
+                description: t("node.menu.monitor.items.descPerfil"),
                 action: () => { }
             }, {
-                label: "Notificaciones",
+                label: t("node.menu.monitor.items.labelNotificaciones"),
                 icon: "bell",
-                description: "Configura tus preferencias de notificación.",
+                description: t("node.menu.monitor.items.descNotificaciones"),
                 action: () => { }
             }, {
-                label: "Personalización",
+                label: t("node.menu.monitor.items.labelPersonalizacion"),
                 icon: "palette",
-                description: "Personaliza tu habitación.",
+                description: t("node.menu.monitor.items.descPersonalizacion"),
                 action: () => { }
             }
         ]
     }
-}
+});
 
 export default menuFactory;
