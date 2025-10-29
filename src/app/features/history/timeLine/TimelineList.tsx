@@ -22,7 +22,7 @@ export function TimelineList({
             aria-label="Línea de tiempo"
             style={{ scrollBehavior: "smooth" }}
         >
-            {items.map((item) => (
+            {items?.map((item) => (
                 <TimelineItem
                     key={item.id}
                     item={item}

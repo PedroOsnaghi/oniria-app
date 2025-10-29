@@ -1,17 +1,13 @@
 import { useHistoryPanel } from "@/app/features/history/hooks/useHistoryPanel";
 import { TimelineProgressBar } from "@/app/features/history/timeLine/TimelineProgressBar";
 import { TimelineList } from "@/app/features/history/timeLine/TimelineList";
-import CtaButton from "@/app/shared/components/CtaButton";
 import HudMenu from "@/app/shared/components/menu/CardMenu";
-import SidebarHeader from "../hud/components/history/SidebarHeader";
-import type { TimelineItem } from "./model/TimelineItem";
+import type { TimelineItem } from "../../model/TimelineItem";
 
 type HistoryVariantProps = {
-  variant: "history";
   title: string;
   description: string;
-  ctaText: string;
-  timeline: TimelineItem[];
+  timeline?: TimelineItem[];
   initialSelectedId?: number;
   onSelectItem?: (_item: TimelineItem) => void;
   onCta?: (_item: TimelineItem) => void;
@@ -20,14 +16,12 @@ type HistoryVariantProps = {
 };
 
 export function HistoryCard(props: HistoryVariantProps) {
-  const { title, description, ctaText, timeline, loading = false } = props;
+  const { title, description, timeline = [], loading = false } = props;
 
   const {
     items,
     selectedId,
     handleSelect,
-    handleCTA,
-    ctaPressed,
     listRef,
     itemRefs,
     progress,
@@ -41,10 +35,15 @@ export function HistoryCard(props: HistoryVariantProps) {
   });
 
   return (
-    <HudMenu.Root className="flex items-start h-fit gap-3">
-      <HudMenu.Container className="w-96 max-w-full flex pb-5 flex-col gap-4 mt-20 ml-20">
+    <HudMenu.Root className="">
+      <HudMenu.Container className="">
 
-        <SidebarHeader title={title} description={description} />
+        <div className="text-[15px] font-semibold text-white/85">
+          {title}
+        </div>
+        <div className="text-[12px] text-white/50">
+          {description}
+        </div>
 
         {loading ? (
           <div className="space-y-4 flex-1">
@@ -66,18 +65,6 @@ export function HistoryCard(props: HistoryVariantProps) {
                 onSelect={handleSelect}
                 listRef={listRef}
                 itemRefs={itemRefs}
-              />
-            </div>
-
-            <div
-              className="mt-4 pt-4 border-t"
-              style={{ borderColor: "var(--surface-weak)" }}
-            >
-              <CtaButton
-                ctaText={ctaText}
-                onClick={handleCTA}
-                disabled={props.ctaDisabled}
-                pressed={ctaPressed}
               />
             </div>
           </>
