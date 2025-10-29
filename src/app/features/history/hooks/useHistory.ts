@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { HistoryService, type HistoryApiResponse } from "../services/history.service";
+import { useAuth } from "@/app/features/auth/hooks/useAuth";
 
 export default function useHistory() {
     const [history, setHistory] = useState<HistoryApiResponse[]>([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const { session } = useAuth();
 
     const fetchHistory = async () => {
         setLoading(true);
@@ -12,7 +14,7 @@ export default function useHistory() {
 
         try {
             const service = new HistoryService();
-            const response = await service.fetchHistory();
+            const response = await service.fetchHistory(session);
             setHistory(response);
             console.log(response);
             return response;

@@ -134,6 +134,14 @@ export class EngineCore extends EventEmitter {
             this.store.setDreamSystemActive(true);
             console.log("[EngineCore]: Actualizando store")
         });
+        this.on("node:ready", () => {
+            console.log("[EngineCore]: Nodo listo - Activando panel de historial");
+            this.store.setHistoryPanelActive(true);
+            this.store.openHistoryPanel();
+            // Deshabilitar interacciones cuando se abre el historial
+
+        });
+
     }
 
     /**
