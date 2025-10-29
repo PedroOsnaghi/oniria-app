@@ -4,7 +4,7 @@ export function TimelineProgressBar({
     progress: number;
 }) {
     return (
-        <div className="relative w-full h-[2px] mb-3">
+        <div className="relative w-full h-[2px]">
             {/* Línea base */}
             <div className="absolute inset-0 w-full h-full rounded-full bg-white/10" />
 

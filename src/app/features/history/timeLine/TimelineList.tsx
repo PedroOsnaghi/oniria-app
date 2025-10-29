@@ -35,7 +35,7 @@ export function TimelineList({
     return (
         <ul
             ref={listRef}
-            className="space-y-6 py-4"
+            className=""
             style={{ scrollBehavior: "smooth" }}
         >
             {items.map((item, index) => (

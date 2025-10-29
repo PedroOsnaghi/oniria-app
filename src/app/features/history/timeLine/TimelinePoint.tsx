@@ -9,7 +9,7 @@ export function TimelinePoint({
         <button
             type="button"
             onClick={onSelect}
-            className="relative shrink-0 mt-1 group/point"
+            className="relative shrink-0 mt-8 group/point"
             aria-label="Seleccionar este punto en la línea de tiempo"
         >
             {/* Punto exterior */}
