@@ -11,7 +11,6 @@ export function PanelHeaderTabs({
     active = "Estadisticas",
     onChange,
     className = "",
-    timeline,
 }: {
     active?: TabKey;
     onChange?: (tab: TabKey) => void;

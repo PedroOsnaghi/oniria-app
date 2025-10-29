@@ -3,7 +3,6 @@ import { TimelineProgressBar } from "./TimelineProgressBar";
 export function TimelineItemContent({
     date,
     title,
-    imageUrl,
     interpretation,
     isActive,
     onSelect,

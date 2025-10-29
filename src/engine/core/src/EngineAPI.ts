@@ -411,7 +411,7 @@ export class EngineAPI {
             // Retornar función de cleanup
             return () => {
                 if (this._core) {
-                    this._core.off("camera:viewNodes", onViewNodes);
+                    this._core.off("camera:viewNodes");
                 }
             };
         },

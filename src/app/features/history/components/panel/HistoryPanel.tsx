@@ -21,7 +21,6 @@ export default function HistoryPanel({
     loading,
     error,
     timeline,
-    isClosing = false,
     onClose,
     title,
     description,
