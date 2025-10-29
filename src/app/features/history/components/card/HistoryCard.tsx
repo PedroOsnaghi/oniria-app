@@ -1,5 +1,4 @@
 import { useHistoryPanel } from "@/app/features/history/hooks/useHistoryPanel";
-import { TimelineProgressBar } from "@/app/features/history/timeLine/TimelineProgressBar";
 import { TimelineList } from "@/app/features/history/timeLine/TimelineList";
 import HudMenu from "@/app/shared/components/menu/CardMenu";
 import type { TimelineItem } from "../../model/TimelineItem";
@@ -25,7 +24,6 @@ export function HistoryCard(props: HistoryVariantProps) {
     listRef,
     itemRefs,
     progress,
-    barHeight,
   } = useHistoryPanel({
     timeline,
     initialSelectedId: props.initialSelectedId,
@@ -35,39 +33,40 @@ export function HistoryCard(props: HistoryVariantProps) {
   });
 
   return (
-    <HudMenu.Root className="">
-      <HudMenu.Container className="">
+    <HudMenu.Root className="flex flex-col h-full">
+      <HudMenu.Container className="flex flex-col h-full">
 
-        <div className="text-[15px] font-semibold text-white/85">
-          {title}
-        </div>
-        <div className="text-[12px] text-white/50">
-          {description}
+        {/* Header */}
+        <div className="mb-6 shrink-0">
+          <div className="text-[15px] font-semibold text-white/90 mb-2">
+            {title}
+          </div>
+          <div className="text-[12px] text-white/50 leading-relaxed">
+            {description}
+          </div>
         </div>
 
+        {/* Timeline Container */}
         {loading ? (
           <div className="space-y-4 flex-1">
             {[...Array(5)].map((_, i) => (
               <div
                 key={i}
-                className="h-6 w-full rounded animate-pulse"
-                style={{ backgroundColor: "var(--skeleton-bg)" }}
+                className="h-6 w-full rounded animate-pulse bg-white/5"
               />
             ))}
           </div>
         ) : (
-          <>
-            <div className="relative flex-1 overflow-y-auto pr-2 custom-scrollbar">
-              <TimelineProgressBar progress={progress} height={barHeight} />
-              <TimelineList
-                items={items}
-                selectedId={selectedId}
-                onSelect={handleSelect}
-                listRef={listRef}
-                itemRefs={itemRefs}
-              />
-            </div>
-          </>
+          <div className="flex-1 min-h-0 overflow-y-auto pr-2 custom-scrollbar">
+            <TimelineList
+              items={items}
+              selectedId={selectedId}
+              onSelect={handleSelect}
+              listRef={listRef}
+              itemRefs={itemRefs}
+              progress={progress}
+            />
+          </div>
         )}
       </HudMenu.Container>
     </HudMenu.Root>
