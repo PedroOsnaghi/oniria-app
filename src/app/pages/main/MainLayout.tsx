@@ -19,11 +19,12 @@ import MenuSystem from "@/app/features/menuSystem/MenuSystem";
 import DreamSystem from "@/app/features/dreams/DreamSystem";
 import { useUserSettings } from "@/app/features/userSettings";
 import { initThemeService } from "@/app/features/dark-mode/services/themeService";
+import HistorySystem from "@/app/features/history/HistorySystem";
 
 export default function MainLayout() {
   //const { t } = useTranslation();
   // const { fetchDreams } = useDreams();
-  const { isDreamSystemActive } = useEngineStore();
+  const { isDreamSystemActive, isHistoryPanelActive } = useEngineStore();
   const handler = useHudHandler();
   const engine = useEngineAPI();
 
@@ -64,6 +65,7 @@ export default function MainLayout() {
         <HudSystem.Body footerHeight="h-24">
           <MenuSystem />
           {isDreamSystemActive && <DreamSystem />}
+          {isHistoryPanelActive && <HistorySystem />}
         </HudSystem.Body>
         {/* Footer reservado para futuras cards o controles */}
         <HudSystem.Footer height="h-24" className="pointer-events-none">

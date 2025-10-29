@@ -66,7 +66,7 @@ export class EventEmitter<T extends EventMap = EventMap> {
      * Desuscribe callbacks de un evento específico.
      * @param _names - Nombre del evento a desuscribir
      */
-    off(_names: string) {
+    off(_names: string, onViewNodes: () => void) {
         // Errors
         if (typeof _names === 'undefined' || _names === '') {
             console.warn('Nombre incorrecto')

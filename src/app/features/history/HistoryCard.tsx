@@ -1,10 +1,10 @@
 import { useHistoryPanel } from "@/app/features/history/hooks/useHistoryPanel";
-import type { TimelineItem } from "@/app/features/history/model/TimelineItem";
 import { TimelineProgressBar } from "@/app/features/history/timeLine/TimelineProgressBar";
 import { TimelineList } from "@/app/features/history/timeLine/TimelineList";
 import CtaButton from "@/app/shared/components/CtaButton";
-import SidebarHeader from "./SidebarHeader";
 import HudMenu from "@/app/shared/components/menu/CardMenu";
+import SidebarHeader from "../hud/components/history/SidebarHeader";
+import type { TimelineItem } from "./model/TimelineItem";
 
 type HistoryVariantProps = {
   variant: "history";

@@ -89,6 +89,8 @@ export class CameraSystem extends BaseSystem implements Injectable {
             true
         );
 
+        // Emitir evento para notificar a los listeners
+        this.core.emit("camera:viewNodes", {});
     }
 
     /**

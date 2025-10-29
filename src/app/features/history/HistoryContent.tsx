@@ -1,5 +1,5 @@
 import Card from "@/app/shared/components/Card";
-import type { TimelineItem } from "@/app/features/history/model/TimelineItem";
+import type { TimelineItem } from "./model/TimelineItem";
 
 interface HistoryContentProps {
   timeline: TimelineItem[];

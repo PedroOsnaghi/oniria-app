@@ -1,8 +1,8 @@
 import { useCallback, useMemo, useRef, useState } from "react";
-import type { TimelineItem } from "../model/TimelineItem";
 import { useTimelineProgress } from "../timeLine/hooks/useTimelineProgress";
 import { useTimelineScroll } from "../timeLine/hooks/useTimelineScroll";
 import { useTimelineKeyboard } from "../timeLine/hooks/useTimelineKeyboard";
+import type { TimelineItem } from "../model/TimelineItem";
 
 interface UseHistoryPanelProps {
     timeline: TimelineItem[];
