@@ -25,10 +25,10 @@ export function PanelHeaderTabs({
 
     const tabs = useMemo(
         () => [
-            { key: "Estadisticas" as const, label: t("historial.estadistica", "Estadística") },
-            { key: "Interpretación" as const, label: t("historial.interpretacion", "Interpretación") },
-            { key: "Imagen" as const, label: t("historial.imagen", "Imagen") },
-            { key: "Stats" as const, label: t("historial.stats", "Stats") },
+            { key: "Estadisticas" as const, label: t("historial.panel.panelEstadisticas.tabEstadisticas") },
+            { key: "Interpretación" as const, label: t("historial.panel.panelEstadisticas.tabInterpretacion") },
+            { key: "Imagen" as const, label: t("historial.panel.panelEstadisticas.tabImagen") },
+            { key: "Stats" as const, label: t("historial.panel.panelEstadisticas.tabStats") },
         ],
         [t]
     );

@@ -28,10 +28,9 @@ export default function HistoryPanel({
     onTabChange,
 }: HistoryPanelProps) {
     const { t } = useTranslation();
-    const displayTitle = title || "HISTORIA ONÍRICA";
+    const displayTitle = title || t("historial.panel.titlePanel");
     const displayDescription =
-        description ||
-        "Aquí puedes explorar todos tus sueños pasados y sus interpretaciones. Cada nodo representa un viaje a tu subconsciente, conectado con símbolos y emociones únicas de tu historia onírica.";
+        description || t("historial.panel.description");
 
     const [activeTab, setActiveTab] = useState<"Estadisticas" | "Interpretación" | "Imagen" | "Stats">("Stats");
 

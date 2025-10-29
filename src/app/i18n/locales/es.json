@@ -59,7 +59,21 @@
     "emocion": "Emoción",
     "soporte": "Soporte",
     "atajos": "Atajos",
-    "salir": "Salir"
+    "salir": "Salir",
+    "panel": {
+      "titlePanel": "HISTORIA ONÍRICA",
+      "description": "Aquí puedes explorar todos tus sueños pasados y sus interpretaciones. Cada nodo representa un viaje a tu subconsciente, conectado con símbolos y emociones únicas de tu historia onírica.",
+      "panelEstadisticas": {
+        "tabEstadisticas": "Estadísticas",
+        "tabInterpretacion": "Interpretación",
+        "tabImagen": "Imagen",
+        "tabStats": "Stats"
+      }
+    },
+    "contentNodos": {
+      "cargando": "Cargando...",
+      "sinSuenos": "No hay sueños guardados todavía."
+    }
   },
   "node": {
     "descriptionLabel": "Descubri el significado de tus sueños con nuestra IA.",
