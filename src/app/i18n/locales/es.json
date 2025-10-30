@@ -93,6 +93,11 @@
     "reinterpretar": "Reinterpretar",
     "acaAparecera": "Acá aparecerá el contenido del sueño...",
     "interpretando": "Interpretando...",
+    "voz": {
+      "transcribiendo": "Transcribiendo...",
+      "hablar": "Hablar",
+      "grabando": "Grabando..."
+    },
     "menu": {
       "portal": "El Portal",
       "labelPortal": "¿Qué soñaste?",

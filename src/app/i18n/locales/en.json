@@ -92,6 +92,11 @@
     "reinterpretar": "Reinterpret",
     "acaAparecera": "Here will appear the content of the dream...",
     "interpretando": "Interpreting...",
+    "voz": {
+      "transcribiendo": "Transcribing...",
+      "hablar": "Speak",
+      "grabando": "Recording..."
+    },
     "menu": {
       "portal": "The Portal",
       "labelPortal": "What did you dream?",
