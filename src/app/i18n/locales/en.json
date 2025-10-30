@@ -123,6 +123,27 @@
       "generando": "Generating...",
       "download": "Download image",
       "guardando": "Saving..."
+    },
+    "profile": {
+      "title": "Profile",
+      "gender": {
+        "label": "Gender:",
+        "male": "He/Him",
+        "female": "She/Her"
+      },
+      "save": "Save Changes",
+      "aiSettings": {
+        "title": "AI Settings",
+        "emotions": "Predominant emotional states:",
+        "premonition": "Premonition probability:",
+        "sensitivity": "Sensitivity",
+        "tests": "Available Tests"
+      },
+      "tests": {
+        "premonition": "Premonition",
+        "personality": "Personality",
+        "appearance": "Appearance"
+      }
     }
   },
   "header": {

@@ -124,7 +124,29 @@
       "generando": "Generando...",
       "download": "Descargar imagen",
       "guardando": "Guardando..."
+    },
+    "profile": {
+      "title": "Perfil",
+      "gender": {
+        "label": "Género:",
+        "male": "Él",
+        "female": "Ella"
+      },
+    "save": "Guardar Cambios",
+    "aiSettings": {
+      "title": "Configuración de la IA",
+      "emotions": "Estados emocionales predominantes:",
+      "premonition": "Probabilidad de premonición:",
+      "sensitivity": "Sensibilidad",
+      "tests": "Tests disponibles"
+      },
+    "tests": {
+      "premonition": "Premonición",
+      "personality": "Personalidad",
+      "appearance": "Apariencia"
     }
+  }
+
   },
   "header": {
     "loading": "Cargando...",

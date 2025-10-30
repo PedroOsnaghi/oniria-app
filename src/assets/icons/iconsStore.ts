@@ -27,6 +27,11 @@ import MoonIcon from "./store/MoonIcon";
 import EyeOpenIcon from "./store/EyeOpenIcon";
 import EyeCloseIcon from "./store/EyeCloseIcon";
 import ArrowIcon from "./store/ArrowIcon";
+import PremonitionIcon from "./store/PremonitionIcon";
+import PersonalityIcon from "./store/PersonalityIcon";
+import AppearanceIcon from "./store/AppearanceIcon";
+import MaleIcon from "./store/MaleIcon";
+import FemaleIcon from "./store/FemaleIcon";
 
 
 export type IconName =
@@ -58,6 +63,11 @@ export type IconName =
     | "eye-open"
     | "eye-close"
     | "arrow"
+    | "premonition"
+    | "personality"
+    | "appearance"
+    | "male"
+    | "female"
     ;
 
 export type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
@@ -91,4 +101,9 @@ export const iconsStore: Record<IconName, IconComponent> = {
     "eye-open": EyeOpenIcon,
     "eye-close": EyeCloseIcon,
     arrow: ArrowIcon,
+    premonition: PremonitionIcon,
+    personality: PersonalityIcon,
+    appearance: AppearanceIcon,
+    male: MaleIcon,
+    female: FemaleIcon,
 };

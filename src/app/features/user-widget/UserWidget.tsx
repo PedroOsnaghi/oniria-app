@@ -7,7 +7,7 @@ type UserProfileProps = {
   onClick?: () => void;
 };
 
-export default function UserProfile({
+export default function UserWidget({
   name,
   email,
   onClick,

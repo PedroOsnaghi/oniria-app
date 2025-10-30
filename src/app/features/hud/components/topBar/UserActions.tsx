@@ -1,6 +1,6 @@
 import NotificationButton from "@/app/features/notifications/components/NotificationButton";
 import MobileMenuButton from "@/app/features/hud/components/topBar/MobileMenuButton";
-import UserProfile from "@/app/features/profile/UserProfile";
+import UserWidget from "@/app/features/user-widget/UserWidget";
 import { useAuth } from "../../../auth/hooks/useAuth";
 import UserLike from "../../../like/UserLike";
 import LanguageToggle from "../../../lang-toggle/LanguageToggle";
@@ -33,7 +33,7 @@ export default function UserActions({
       <UserLike />
       <LanguageToggle />
       <NotificationButton onClick={onNotificationClick} />
-      <UserProfile
+      <UserWidget
         name={user?.user_metadata.full_name ?? "Invitado"}
         email={user?.email ?? ""}
         onClick={onClick}
