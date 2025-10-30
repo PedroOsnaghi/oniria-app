@@ -76,7 +76,7 @@ export default function Profile() {
 
                     {/* Botón guardar */}
                     <button
-                        className="mt-5 mb-4 px-4 py-2 rounded-lg font-semibold text-sm transition cursor-pointer"
+                        className="mt-5 mb-4 px-4 py-2 rounded-lg font-semibold text-sm transition cursor-pointer text-white"
                         style={{
                             background: "linear-gradient(to right, var(--btn-primary-from), var(--btn-primary-to))",
                             boxShadow: "var(--btn-primary-glow)",
