@@ -6,12 +6,12 @@ export default function Profile() {
     const { t } = useTranslation();
 
     return (
-        <div className="flex flex-col md:flex-row gap-6 w-full max-w-5xl text-white">
+        <div className="flex flex-col md:flex-row gap-6 w-full max-w-5xl">
 
-            {/* 🪞 Información del usuario */}
+            {/* Información del usuario */}
             <Card.Container
-                className="md:w-1/3 w-full flex flex-col items-center justify-between text-center px-8 py-10 bg-[var(--surface-subtle)] border border-[var(--border-subtle)]"
-            >
+                className="md:w-1/3 w-full flex flex-col items-center text-center px-8 py-10 bg-[var(--surface-subtle)] border border-[var(--border-subtle)]"
+                >
                 <div className="flex flex-col items-center gap-4">
                     <h2 className="text-lg font-semibold text-[var(--text-80)] mb-6">
                         {t("profile.title", { defaultValue: "Perfil" })}
@@ -38,7 +38,7 @@ export default function Profile() {
                         </p>
                     </div>
 
-                    {/* 🔮 Pronombres / Género */}
+                    {/* Pronombres / Género */}
                     <div className="mt-8 w-full">
                         <p className="text-xs text-gray-400 mb-3 text-center">
                             {t("profile.gender.label", { defaultValue: "Género:" })}
@@ -53,6 +53,7 @@ export default function Profile() {
                             ).map(({ icon, label }) => (
                                 <div key={label} className="relative group">
                                     <button
+                                        aria-label={label}
                                         className="w-10 h-10 flex items-center justify-center rounded-full border transition-all"
                                         style={{
                                             background: "var(--surface-weak)",
