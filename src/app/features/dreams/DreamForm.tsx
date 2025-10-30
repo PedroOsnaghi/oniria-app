@@ -7,6 +7,7 @@ import Icon from "@/assets/icons/Icon";
 import { useAuth } from "@/app/features/auth/hooks/useAuth";
 import useDreamService from "./hooks/useDreamService";
 import { useVoiceToText } from "./hooks/useVoiceToText";
+import { useTextareaTypewriter } from "./hooks/useTextareaTypewriter";
 
 interface DreamFormProps {
   maxChars?: number;
@@ -20,20 +21,30 @@ export default function DreamForm({
   onClose,
 }: DreamFormProps) {
   const { t } = useTranslation();
-  const { user } = useAuth();
+  const { user, session } = useAuth();
   const { dream, dreamRef, handleTextChange, charsLeft, isTooLong, isEmpty } =
     useDreamInput({
       maxChars,
     });
 
   const { handleInterpret: interpretDream, loading } = useDreamService();
-
+  const { typeInto } = useTextareaTypewriter();
   const { isRecording, isTranscribing, handleToggleRecording } = useVoiceToText({
+    session,
     onTranscribed: (text) => {
-      handleTextChange(text);
-      if (dreamRef?.current) {
-        dreamRef.current.focus();
-      }
+      const current = dreamRef?.current?.value ?? dream ?? "";
+      const base = current ? `${current.trim()}\n` : "";
+      typeInto({
+        baseText: base,
+        toType: text,
+        speed: 40,
+        onUpdate: (animatedText) => {
+          handleTextChange(animatedText);
+        },
+        onFinish: () => {
+          dreamRef?.current?.focus();
+        },
+      });
     },
   });
 

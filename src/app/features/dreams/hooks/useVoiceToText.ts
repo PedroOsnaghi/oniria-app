@@ -1,45 +1,34 @@
 import { useRef, useState } from "react";
+import type { Session } from "@supabase/supabase-js";
+import { TranscriptionService } from "../services/transcription.service";
 
 type UseVoiceToTextProps = {
     onTranscribed?: (text: string) => void;
-    endpoint?: string;
+    session?: Session | null;
 };
 
 export function useVoiceToText({
     onTranscribed,
-    endpoint = "/api/dreams/transcribe",
+    session,
 }: UseVoiceToTextProps = {}) {
     const [isRecording, setIsRecording] = useState(false);
     const [isTranscribing, setIsTranscribing] = useState(false);
     const mediaRecorderRef = useRef<MediaRecorder | null>(null);
     const chunksRef = useRef<Blob[]>([]);
+    const transcriptionServiceRef = useRef(new TranscriptionService());
 
     const sendAudioToBackend = async (audioBlob: Blob) => {
         setIsTranscribing(true);
         try {
-            console.log("[useVoiceToText] enviando blob al back:", {
-                size: audioBlob.size,
-                type: audioBlob.type,
-            });
-            const formData = new FormData();
-            formData.append("audio", audioBlob, "dream-audio.webm");
+            const text = await transcriptionServiceRef.current.transcriptionDream(
+                session ?? null,
+                audioBlob
+            );
 
-            const res = await fetch(endpoint, {
-                method: "POST",
-                body: formData,
-            });
+            console.log("[useVoiceToText] texto transcripto:", text);
 
-            if (!res.ok) {
-                throw new Error("Error transcribiendo audio");
-            }
-
-            const data = await res.json();
-            const transcribedText = data?.text ?? "";
-
-            console.log("[useVoiceToText] respuesta del back:", data);
-
-            if (transcribedText && onTranscribed) {
-                onTranscribed(transcribedText);
+            if (text && onTranscribed) {
+                onTranscribed(text);
             }
         } catch (err) {
             console.error("Error enviando audio al backend:", err);
@@ -50,7 +39,6 @@ export function useVoiceToText({
 
     const handleToggleRecording = async () => {
         if (isRecording) {
-            // parar grabación
             console.log("[useVoiceToText] stop recording");
             mediaRecorderRef.current?.stop();
             setIsRecording(false);
@@ -73,7 +61,6 @@ export function useVoiceToText({
             };
 
             mediaRecorder.onstop = async () => {
-                // blob con el mime correcto
                 const blob = new Blob(chunksRef.current, { type: "audio/webm" });
                 console.log("[useVoiceToText] grabación finalizada. Blob armado:", {
                     size: blob.size,
