@@ -142,7 +142,9 @@
   },
   "header": {
     "loading": "Cargando...",
-    "guest": "Invitado"
+    "guest": "Invitado",
+    "closeSesion": "Cerrar sesión",
+    "closingSesion": "Cerrando sesión..."
   },
   "private_route": {
     "loading": "Cargando..."
