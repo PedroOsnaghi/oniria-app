@@ -6,6 +6,8 @@ import { useTranslation } from "react-i18next";
 import Icon from "@/assets/icons/Icon";
 import { useAuth } from "@/app/features/auth/hooks/useAuth";
 import useDreamService from "./hooks/useDreamService";
+import { useVoiceToText } from "./hooks/useVoiceToText";
+import { useTextareaTypewriter } from "./hooks/useTextareaTypewriter";
 
 interface DreamFormProps {
   maxChars?: number;
@@ -19,13 +21,32 @@ export default function DreamForm({
   onClose,
 }: DreamFormProps) {
   const { t } = useTranslation();
-  const { user } = useAuth();
+  const { user, session } = useAuth();
   const { dream, dreamRef, handleTextChange, charsLeft, isTooLong, isEmpty } =
     useDreamInput({
       maxChars,
     });
 
   const { handleInterpret: interpretDream, loading } = useDreamService();
+  const { typeInto } = useTextareaTypewriter();
+  const { isRecording, isTranscribing, handleToggleRecording } = useVoiceToText({
+    session,
+    onTranscribed: (text) => {
+      const current = dreamRef?.current?.value ?? dream ?? "";
+      const base = current ? `${current.trim()}\n` : "";
+      typeInto({
+        baseText: base,
+        toType: text,
+        speed: 40,
+        onUpdate: (animatedText) => {
+          handleTextChange(animatedText);
+        },
+        onFinish: () => {
+          dreamRef?.current?.focus();
+        },
+      });
+    },
+  });
 
   const handleClose = () => {
     onClose?.();
@@ -60,7 +81,7 @@ export default function DreamForm({
             {t("node.portal.saludoDos")}
           </h2>
           <p className="text-xs text-text-muted">
-            {t("node.portal.descripcion")}
+            {t("node.portal.description")}
           </p>
           <DreamTextarea
             ref={dreamRef}
@@ -71,23 +92,45 @@ export default function DreamForm({
             isTooLong={isTooLong}
           />
         </HudMenu.Body>
-        <HudMenu.Footer className="flex justify-end">
+        <HudMenu.Footer className="flex justify-end mt-auto gap-2">
+          {/* Botón de voz */}
+          <button
+            onClick={handleToggleRecording}
+            className="modal-button"
+            disabled={isTranscribing}
+          >
+            <span
+              className={`flex items-center gap-2 text-light ${isEmpty || isTooLong || loading ? "opacity-80" : "opacity-100"
+                }`}
+            >
+              {isRecording ? (
+                <Icon name="spinner" className="text-xs w-5 h-5 animate-spin" />
+              ) : (
+                <Icon name="mic" className="text-xs w-5 h-5" />
+              )}
+              {isRecording
+                ? t("node.voz.grabando")
+                : isTranscribing
+                  ? t("node.voz.transcribiendo")
+                  : t("node.voz.hablar")}
+            </span>
+          </button>
+
           <button
             onClick={handleInterpret}
             disabled={isEmpty || isTooLong || loading}
             className="modal-button"
           >
             <span
-              className={`flex items-center gap-2 text-light ${
-                isEmpty || isTooLong || loading ? "opacity-80" : "opacity-100"
-              }`}
+              className={`flex items-center gap-2 text-light ${isEmpty || isTooLong || loading ? "opacity-80" : "opacity-100"
+                }`}
             >
               {loading ? (
                 <Icon name="spinner" className="text-xs w-5 h-5 animate-spin" />
               ) : (
                 <Icon name="magic" className="text-xs w-5 h-5" />
               )}
-              {loading ? "Interpretando..." : t("node.interpretar")}
+              {loading ? t("node.interpretando") : t("node.interpretar")}
             </span>
           </button>
         </HudMenu.Footer>
