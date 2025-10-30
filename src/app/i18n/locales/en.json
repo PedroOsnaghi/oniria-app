@@ -141,7 +141,9 @@
   },
   "header": {
     "loading": "Loading...",
-    "guest": "Guest"
+    "guest": "Guest",
+    "closeSesion": "Close session",
+    "closingSesion": "Closing session..."
   },
   "private_route": {
     "loading": "Loading..."
