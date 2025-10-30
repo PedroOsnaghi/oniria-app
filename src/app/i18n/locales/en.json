@@ -59,7 +59,21 @@
     "emocion": "Emotion",
     "soporte": "Support",
     "atajos": "Shortcuts",
-    "salir": "Exit"
+    "salir": "Exit",
+    "panel": {
+      "titlePanel": "DREAM HISTORY",
+      "description": "Here you can explore all your past dreams and their interpretations. Each node represents a journey into your subconscious, connected with unique symbols and emotions from your dream history.",
+      "panelEstadisticas": {
+        "tabEstadisticas": "Statistics",
+        "tabInterpretacion": "Interpretation",
+        "tabImagen": "Image",
+        "tabStats": "Stats"
+      }
+    },
+    "contentNodos": {
+      "cargando": "Loading...",
+      "sinSuenos": "No saved dreams yet."
+    }
   },
   "node": {
     "descriptionLabel": "Write your dream",

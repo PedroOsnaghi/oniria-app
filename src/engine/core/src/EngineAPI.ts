@@ -393,6 +393,29 @@ export class EngineAPI {
             (cameraSystem as CameraSystem).viewNodes();
         },
 
+        onViewNodes: (callback: () => void): (() => void) => {
+            if (!this._core) {
+                console.warn("[EngineAPI] Core no disponible para camera.onViewNodes");
+                return () => { };
+            }
+
+            console.log("[EngineAPI] Suscribiéndose a evento camera:viewNodes");
+
+            const onViewNodes = () => {
+                console.log("[EngineAPI] Evento camera:viewNodes recibido, ejecutando callback");
+                callback();
+            };
+
+            this._core.on("camera:viewNodes", onViewNodes);
+
+            // Retornar función de cleanup
+            return () => {
+                if (this._core) {
+                    this._core.off("camera:viewNodes");
+                }
+            };
+        },
+
         /**
          * Transiciona la cámara para ver los nodos de la sala activa
          */

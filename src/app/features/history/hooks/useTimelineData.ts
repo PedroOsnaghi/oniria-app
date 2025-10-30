@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import type { TimelineItem } from "../model/TimelineItem";
 import useHistory from "./useHistory";
 
@@ -8,31 +8,37 @@ export function useTimelineData() {
     const [error, setError] = useState<string | null>(null);
 
     const { fetchHistory } = useHistory();
+    const didFetchRef = useRef(false);
 
     useEffect(() => {
         let mounted = true;
 
         const loadHistory = async () => {
+            if (didFetchRef.current) return;
+            didFetchRef.current = true;
+
             try {
-                const data = await fetchHistory();
-                if (mounted) {
-                    setTimeline(
-                        Array.isArray(data)
-                            ? data.map(item => ({
-                                ...item,
-                                id: typeof item.id === "string" ? Number(item.id) : item.id
-                            }))
-                            : []
-                    );
+                const response = await fetchHistory();
+                console.log("Fetched timeline data:", response);
+
+                if (mounted && response.data) {
+                    const mappedTimeline: TimelineItem[] = response.data.map((item) => ({
+                        id: Number(item.id),
+                        date: item.creationDate,
+                        title: item.title,
+                        interpretation: item.interpretation,
+                        imageUrl: item.imageUrl ?? undefined,
+                    }));
+
+                    setTimeline(mappedTimeline);
                 }
             } catch (e: any) {
                 if (mounted) {
                     setError(e?.message ?? "Error cargando historial");
+                    setTimeline([]);
                 }
             } finally {
-                if (mounted) {
-                    setLoading(false);
-                }
+                if (mounted) setLoading(false);
             }
         };
 

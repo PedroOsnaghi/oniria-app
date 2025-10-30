@@ -20,6 +20,11 @@ export interface DreamFormState {
     data?: Dream | null;
 }
 
+export interface HistoryPanelState {
+    isOpen: boolean;
+    isClosing: boolean;
+}
+
 type LoadingItem = {
     url: string;
     type: 'gltf' | 'texture' | 'ktx2' | 'audio' | 'binary';
@@ -162,6 +167,13 @@ type EngineStore = {
     // Dream system state - controla si DreamSystem debe estar montado
     isDreamSystemActive: boolean;
     setDreamSystemActive: (_active: boolean) => void;
+
+    // History panel state
+    isHistoryPanelActive: boolean;
+    setHistoryPanelActive: (_active: boolean) => void;
+    historyPanel: HistoryPanelState;
+    openHistoryPanel: () => void;
+    closeHistoryPanel: () => void;
 
     // Loading state - nuestro sistema propio
     active: boolean;
@@ -313,6 +325,22 @@ export const useEngineStore = create<EngineStore>((set, get) => ({
     // Dream system state
     isDreamSystemActive: false,
     setDreamSystemActive: (active) => set({ isDreamSystemActive: active }),
+
+    // History panel state
+    isHistoryPanelActive: false,
+    setHistoryPanelActive: (active) => set({ isHistoryPanelActive: active }),
+    historyPanel: {
+        isOpen: false,
+        isClosing: false,
+    },
+    openHistoryPanel: () =>
+        set((state) => ({
+            historyPanel: { ...state.historyPanel, isOpen: true, isClosing: false },
+        })),
+    closeHistoryPanel: () =>
+        set((state) => ({
+            historyPanel: { ...state.historyPanel, isClosing: true },
+        })),
 
     // Loading state inicial
     active: false,

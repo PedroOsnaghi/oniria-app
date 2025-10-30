@@ -7,22 +7,38 @@ export function TimelineList({
     onSelect,
     listRef,
     itemRefs,
+    progress,
 }: {
     items: TimelineItemType[];
     selectedId?: number;
     onSelect: (_id: number) => void;
     listRef: RefObject<HTMLUListElement | null>;
     itemRefs: MutableRefObject<Map<number, HTMLLIElement>>;
+    progress?: number;
 }) {
+    if (!items || items.length === 0) {
+        return (
+            <div className="flex items-center justify-center h-full text-white/40 text-sm">
+                No hay elementos en el historial
+            </div>
+        );
+    }
+
+    // Calcular el progreso individual de cada item basado en su índice
+    const getItemProgress = (index: number) => {
+        if (typeof progress !== 'number') return undefined;
+        const itemProgress = progress * items.length;
+        const currentItemProgress = itemProgress - index;
+        return Math.max(0, Math.min(1, currentItemProgress));
+    };
+
     return (
         <ul
             ref={listRef}
-            tabIndex={0}
-            className="space-y-8 pl-12 pr-4 outline-none"
-            aria-label="Línea de tiempo"
+            className=""
             style={{ scrollBehavior: "smooth" }}
         >
-            {items.map((item) => (
+            {items.map((item, index) => (
                 <TimelineItem
                     key={item.id}
                     item={item}
@@ -35,6 +51,7 @@ export function TimelineList({
                             itemRefs.current.delete(item.id);
                         }
                     }}
+                    progress={getItemProgress(index)}
                 />
             ))}
         </ul>

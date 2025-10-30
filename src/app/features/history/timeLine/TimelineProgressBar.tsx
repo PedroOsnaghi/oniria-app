@@ -1,29 +1,22 @@
-export function TimelineProgressBar({ progress, height }: { progress: number; height: number }) {
+export function TimelineProgressBar({
+    progress,
+}: {
+    progress: number;
+}) {
     return (
-        <>
-            {/* Barra base */}
-            <div
-                className="absolute left-3 w-[3px] rounded top-[25px]"
-                style={{
-                    height: `${height}px`,
-                    backgroundColor: "var(--color-timeline-base)",
-                }}
-            />
+        <div className="relative w-full h-[2px]">
+            {/* Línea base */}
+            <div className="absolute inset-0 w-full h-full rounded-full bg-white/10" />
 
-            {/* Barra de progreso */}
+            {/* Línea de progreso */}
             <div
-                className="absolute left-3 w-[3px] rounded transition-all duration-500 ease-out top-[25px]"
+                className="absolute left-0 top-0 h-full rounded-full transition-all duration-500 ease-out"
                 style={{
-                    height: `${height * progress}px`,
-                    background: `linear-gradient(
-                        to bottom,
-                        var(--color-timeline-progress-from),
-                        var(--color-timeline-active-bg),
-                        var(--color-timeline-progress-to)
-                    )`,
-                    boxShadow: "var(--color-timeline-progress-shadow)",
+                    width: `${Math.max(0, Math.min(100, progress * 100))}%`,
+                    background: 'linear-gradient(90deg, rgba(139, 92, 246, 0.8) 0%, rgba(139, 92, 246, 0.4) 100%)',
+                    boxShadow: '0 0 12px rgba(139, 92, 246, 0.6)',
                 }}
             />
-        </>
+        </div>
     );
 }
