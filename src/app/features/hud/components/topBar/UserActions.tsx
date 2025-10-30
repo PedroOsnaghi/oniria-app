@@ -14,18 +14,18 @@ type UserActionsProps = {
 
 export default function UserActions({
   onNotificationClick,
-  onProfileClick,
+  //onProfileClick,
   onMenuClick,
 }: UserActionsProps) {
   const { user, signOut } = useAuth();
 
-  const onClick = () => {
-    if (onProfileClick) {
-      onProfileClick();
-    } else {
-      signOut();
-    }
-  };
+  // const onClick = () => {
+  //   if (onProfileClick) {
+  //     onProfileClick();
+  //   } else {
+  //     signOut();
+  //   }
+  // };
 
   return (
     <div className="header-actions items-centeru gap-4">
@@ -36,7 +36,7 @@ export default function UserActions({
       <UserProfile
         name={user?.user_metadata.full_name ?? "Invitado"}
         email={user?.email ?? ""}
-        onClick={onClick}
+        onLogout={signOut}
       />
       <MobileMenuButton onClick={onMenuClick} />
     </div>
