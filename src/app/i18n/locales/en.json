@@ -51,7 +51,7 @@
     "link": "History",
     "verSuenos": "See your saved dreams",
     "title": "Explore your Nodes",
-    "description": "Select from the templates you like best",
+    "description": "Select the node you want to explore in your dream history.",
     "oniriaPro": "Try Oniria PRO",
     "visibility": "Visibility",
     "public": "Public",
@@ -67,15 +67,19 @@
         "tabEstadisticas": "Statistics",
         "tabInterpretacion": "Interpretation",
         "tabImagen": "Image",
-        "tabStats": "Stats"
+        "tabStats": "Stats",
+        "seleccionaSueño": "Select a dream to see its details",
+        "interpretacion": "Interpretation",
+        "noInterpretacion": "No interpretation available",
+        "noImage": "No image available"
       }
     },
     "contentNodos": {
-      "cargando": "Loading...",
-      "sinSuenos": "No saved dreams yet."
+      "cargando": "Loading..."
     }
   },
   "node": {
+    "bitacora": "DREAM JOURNAL",
     "descriptionLabel": "Write your dream",
     "placeholderNode": "Write your dream here…",
     "character1": "You exceeded the maximum of ",
@@ -141,7 +145,8 @@
       "generarImagen": "Generate image",
       "generando": "Generating...",
       "download": "Download image",
-      "guardando": "Saving..."
+      "guardando": "Saving...",
+      "guardado": "Saved"
     }
   },
   "header": {

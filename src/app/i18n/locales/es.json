@@ -51,7 +51,7 @@
     "link": "Historial",
     "verSuenos": "Ver tus sueños guardados",
     "title": "Explora tus Nodos",
-    "description": "Selecciona entre las plantillas que más te gusten",
+    "description": "Selecciona el nodo que deseas explorar en tu historia onírica.",
     "oniriaPro": "Probá Oniria PRO",
     "visibility": "Visibilidad",
     "public": "Público",
@@ -67,15 +67,19 @@
         "tabEstadisticas": "Estadísticas",
         "tabInterpretacion": "Interpretación",
         "tabImagen": "Imagen",
-        "tabStats": "Stats"
+        "tabStats": "Stats",
+        "seleccionaSueño": "Selecciona un sueño para ver sus detalles",
+        "interpretacion": "Interpretación",
+        "noInterpretacion": "No hay interpretación disponible",
+        "noImage": "No hay imagen disponible"
       }
     },
     "contentNodos": {
-      "cargando": "Cargando...",
-      "sinSuenos": "No hay sueños guardados todavía."
+      "cargando": "Cargando..."
     }
   },
   "node": {
+    "bitacora": "BITÁCORA",
     "descriptionLabel": "Descubri el significado de tus sueños con nuestra IA.",
     "placeholderNode": "Hoy soñe …",
     "character1": "Te pasaste del máximo de ",
@@ -142,7 +146,8 @@
       "generarImagen": "Generar imagen",
       "generando": "Generando...",
       "download": "Descargar imagen",
-      "guardando": "Guardando..."
+      "guardando": "Guardando...",
+      "guardado": "Guardado"
     }
   },
   "header": {

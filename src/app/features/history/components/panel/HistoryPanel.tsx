@@ -12,6 +12,8 @@ interface HistoryPanelProps {
     error?: string | null;
     isClosing?: boolean;
     onClose?: () => void;
+    onSelectItem?: (_item: TimelineItem) => void;
+    selectedDream?: TimelineItem | null;
     title?: string;
     description?: string;
     onTabChange?: (tab: "Estadisticas" | "Interpretación" | "Imagen" | "Stats") => void;
@@ -22,6 +24,8 @@ export default function HistoryPanel({
     error,
     timeline,
     onClose,
+    onSelectItem,
+    selectedDream,
     title,
     description,
     onTabChange,
@@ -62,9 +66,9 @@ export default function HistoryPanel({
                             description={t("historial.description")}
                             timeline={timeline ?? []}
                             loading={loading}
+                            onSelectItem={onSelectItem}
                         />
                         <HistoryContent
-                            timeline={timeline ?? []}
                             loading={loading ?? false}
                             error={error ?? null}
                         />
@@ -81,6 +85,7 @@ export default function HistoryPanel({
                     active={activeTab}
                     onChange={handleChangeTab}
                     timeline={timeline}
+                    selectedDream={selectedDream}
                 />
             </div>
         </div>

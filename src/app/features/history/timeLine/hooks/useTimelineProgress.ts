@@ -3,9 +3,9 @@ import type { TimelineItemType } from "../TimelineItem";
 
 type UseTimelineProgressProps = {
     listRef: RefObject<HTMLUListElement | null>;
-    itemRefs: MutableRefObject<Map<number, HTMLLIElement>>;
+    itemRefs: MutableRefObject<Map<string, HTMLLIElement>>;
     items: TimelineItemType[];
-    selectedId?: number;
+    selectedId?: string;
 };
 
 export function useTimelineProgress({ listRef, itemRefs, items, selectedId }: UseTimelineProgressProps) {

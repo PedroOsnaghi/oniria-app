@@ -1,12 +1,11 @@
 import { useCallback, useMemo, useRef, useState } from "react";
 import { useTimelineProgress } from "../timeLine/hooks/useTimelineProgress";
 import { useTimelineScroll } from "../timeLine/hooks/useTimelineScroll";
-import { useTimelineKeyboard } from "../timeLine/hooks/useTimelineKeyboard";
 import type { TimelineItem } from "../model/TimelineItem";
 
 interface UseHistoryPanelProps {
     timeline: TimelineItem[];
-    initialSelectedId?: number;
+    initialSelectedId?: string;
     onSelectItem?: (_item: TimelineItem) => void;
     onCta?: (_item: TimelineItem) => void;
     ctaDisabled?: boolean;
@@ -16,19 +15,15 @@ export function useHistoryPanel({
     timeline,
     initialSelectedId,
     onSelectItem,
-    onCta,
-    ctaDisabled = false,
 }: UseHistoryPanelProps) {
     const initialSelected =
         initialSelectedId ??
         timeline.find((t) => t.active)?.id ??
         (timeline.length ? timeline[0].id : undefined);
 
-    const [selectedId, setSelectedId] = useState<number | undefined>(initialSelected);
-    const [ctaPressed, setCtaPressed] = useState(false);
-
+    const [selectedId, setSelectedId] = useState<string | undefined>(initialSelected);
     const listRef = useRef<HTMLUListElement>(null);
-    const itemRefs = useRef<Map<number, HTMLLIElement>>(new Map());
+    const itemRefs = useRef<Map<string, HTMLLIElement>>(new Map());
 
     const items = useMemo(
         () =>
@@ -47,23 +42,14 @@ export function useHistoryPanel({
     const selectedItem = useMemo(() => items[selectedIndex], [items, selectedIndex]);
 
     const handleSelect = useCallback(
-        (id: number) => {
+        (id: string) => {
+            console.log("Selected ID:", id);
             setSelectedId(id);
-            const found = timeline.find((t) => t.id === id);
-            if (found && onSelectItem) onSelectItem(found);
+            const item = timeline.find((it) => it.id === id);
+            if (item && onSelectItem) onSelectItem(item);
         },
         [timeline, onSelectItem]
     );
-
-    const handleCTA = useCallback(async () => {
-        if (!selectedItem || ctaDisabled) return;
-        setCtaPressed(true);
-        try {
-            await onCta?.(selectedItem);
-        } finally {
-            setTimeout(() => setCtaPressed(false), 400);
-        }
-    }, [onCta, selectedItem, ctaDisabled]);
 
     const { progress, barHeight } = useTimelineProgress({
         listRef,
@@ -78,20 +64,11 @@ export function useHistoryPanel({
         listRef,
     });
 
-    useTimelineKeyboard({
-        listRef,
-        items,
-        selectedIndex,
-        onSelect: handleSelect,
-    });
-
     return {
         selectedId,
         items,
         selectedItem,
         handleSelect,
-        handleCTA,
-        ctaPressed,
         listRef,
         itemRefs,
         progress,

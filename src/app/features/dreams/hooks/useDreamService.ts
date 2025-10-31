@@ -19,7 +19,6 @@ export default function useDreamService() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const { session } = useAuth();
-
     // Obtener setDream del store
     const setDream = useEngineStore((state) => state.setDream);
 
@@ -29,7 +28,7 @@ export default function useDreamService() {
 
         try {
             const service = new DreamsService();
-            const response = await service.fetchDreamInterpretation(description);
+            const response = await service.fetchDreamInterpretation(session, description);
             setDreams([response]);
 
             // Adaptar y guardar en el store

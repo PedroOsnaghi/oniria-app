@@ -237,7 +237,7 @@ export default function DreamManager({
                 : saveState === "saved" && imageState === "generating"
                 ? t("node.panelImage.generandoImagen")
                 : saveState === "saved"
-                ? "¡Interpretación guardada!"
+                ? t("node.panelImage.interpretacionGuardada")
                 : t("node.panelImage.title")
             }
             message={
@@ -250,7 +250,7 @@ export default function DreamManager({
                 : t("node.panelImage.description")
             }
             variant="feature"
-            linkText={saveState !== "saved" ? "Saber más" : undefined}
+            linkText={saveState !== "saved" ? t("node.panelImage.saberMas") : undefined}
             onLinkClick={
               saveState !== "saved"
                 ? () => {
