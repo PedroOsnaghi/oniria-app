@@ -1,10 +1,8 @@
 import type { Session } from "@supabase/supabase-js";
 
 export class TranscriptionService {
-    async transcriptionDream(
-        session: Session | null,
-        audioBlob: Blob
-    ): Promise<string> {
+    async transcriptionDream(session: Session | null, audioBlob: Blob): Promise<string> {
+        
         if (!session?.access_token) {
             throw new Error("No authentication token available");
         }

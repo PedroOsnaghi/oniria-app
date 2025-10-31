@@ -7,7 +7,7 @@ type HistoryVariantProps = {
   title: string;
   description: string;
   timeline?: TimelineItem[];
-  initialSelectedId?: number;
+  initialSelectedId?: string;
   onSelectItem?: (_item: TimelineItem) => void;
   onCta?: (_item: TimelineItem) => void;
   ctaDisabled?: boolean;
@@ -15,7 +15,7 @@ type HistoryVariantProps = {
 };
 
 export function HistoryCard(props: HistoryVariantProps) {
-  const { title, description, timeline = [], loading = false } = props;
+  const { title, description, timeline = [], loading = false, onSelectItem } = props;
 
   const {
     items,
@@ -27,9 +27,7 @@ export function HistoryCard(props: HistoryVariantProps) {
   } = useHistoryPanel({
     timeline,
     initialSelectedId: props.initialSelectedId,
-    onSelectItem: props.onSelectItem,
-    onCta: props.onCta,
-    ctaDisabled: props.ctaDisabled,
+    onSelectItem,
   });
 
   return (
@@ -37,7 +35,7 @@ export function HistoryCard(props: HistoryVariantProps) {
       <HudMenu.Container className="flex flex-col h-full">
 
         {/* Header */}
-        <div className="mb-3 shrink-0">
+        <div className="mb-2 mt-2 shrink-0">
           <div className="text-[15px] font-semibold text-white/90">
             {title}
           </div>
@@ -57,7 +55,7 @@ export function HistoryCard(props: HistoryVariantProps) {
             ))}
           </div>
         ) : (
-          <div>
+          <div className="flex-1 min-h-0 overflow-hidden">
             <TimelineList
               items={items}
               selectedId={selectedId}

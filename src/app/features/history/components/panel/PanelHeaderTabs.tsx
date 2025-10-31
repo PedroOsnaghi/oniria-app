@@ -11,11 +11,13 @@ export function PanelHeaderTabs({
     active = "Estadisticas",
     onChange,
     className = "",
+    selectedDream,
 }: {
     active?: TabKey;
     onChange?: (tab: TabKey) => void;
     className?: string;
     timeline?: TimelineItem[];
+    selectedDream?: TimelineItem | null;
 }) {
     const { t } = useTranslation();
     const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -59,6 +61,22 @@ export function PanelHeaderTabs({
                 {/* TODO EL CONTENIDO VA EN EL HEADER */}
                 <HudMenu.Header>
                     <div className={`relative w-full ${className}`}>
+                        {/* Mostrar info del sueño seleccionado */}
+                        {selectedDream && (
+                            <div className="mb-4 p-4 rounded-xl bg-violet-500/10 border border-violet-500/20">
+                                <h3 className="text-base font-semibold text-white mb-1">
+                                    {selectedDream.title}
+                                </h3>
+                                <time className="text-xs text-white/50">
+                                    {new Date(selectedDream.date).toLocaleDateString("es-ES", {
+                                        weekday: "long",
+                                        day: "numeric",
+                                        month: "long",
+                                        year: "numeric",
+                                    })}
+                                </time>
+                            </div>
+                        )}
                         <div
                             ref={scrollContainerRef}
                             role="tablist"
@@ -106,44 +124,65 @@ export function PanelHeaderTabs({
                 </HudMenu.Header>
 
                 <HudMenu.Body>
-                    {(active === "Estadisticas") && (
-                        <StatisticCard
-                            metrics={[
-                                { label: "interpretaciones", value: 25, sub: "S/ Logro: 45" },
-                                { label: "Esta semana", value: 2 },
-                                { label: "Compartidos", value: 16 },
-                            ]}
-                            stats={[
-                                { title: "Estadística Tipo 1 / Stats", label: "Estadística", hint: "Cantidad del valor medido / Total", percent: 80 },
-                                { title: "Estadística Tipo 1 / Stats", label: "Estadística", hint: "Cantidad del valor medido / Total", percent: 42 },
-                                { title: "Estadística Tipo 1 / Stats", label: "Estadística", hint: "Cantidad del valor medido / Total", percent: 80 },
-                            ]}
-                        />
-                    )}
-                    {/* opcional: placeholder liviano para evitar salto de layout */}
-                    {(active === "Interpretación") && (
-                        <div className="text-sm text-zinc-400/90 py-2">
+                    {!selectedDream ? (
+                        <div className="flex items-center justify-center h-32 text-white/40 text-sm">
+                            {t("historial.panel.panelEstadisticas.seleccionaSueño")}
                         </div>
+                    ) : (
+                        <>
+                            {active === "Estadisticas" && (
+                                <StatisticCard
+                                    metrics={[
+                                        { label: "interpretaciones", value: 25, sub: "S/ Logro: 45" },
+                                        { label: "Esta semana", value: 2 },
+                                        { label: "Compartidos", value: 16 },
+                                    ]}
+                                    stats={[
+                                        { title: "Estadística Tipo 1 / Stats", label: "Estadística", hint: "Cantidad del valor medido / Total", percent: 80 },
+                                        { title: "Estadística Tipo 1 / Stats", label: "Estadística", hint: "Cantidad del valor medido / Total", percent: 42 },
+                                        { title: "Estadística Tipo 1 / Stats", label: "Estadística", hint: "Cantidad del valor medido / Total", percent: 80 },
+                                    ]}
+                                />
+                            )}
+                            {active === "Interpretación" && (
+                                <div className="p-4 rounded-xl bg-zinc-900/50 border border-white/5">
+                                    <h4 className="text-sm font-medium text-white/90 mb-2">{t("historial.panel.panelEstadisticas.interpretacion")}</h4>
+                                    <p className="text-sm text-white/70 leading-relaxed">
+                                        {selectedDream.interpretation || t("historial.panel.panelEstadisticas.noInterpretacion")}
+                                    </p>
+                                </div>
+                            )}
+                            {active === "Imagen" && (
+                                <div className="p-4 rounded-xl bg-zinc-900/50 border border-white/5">
+                                    {selectedDream.imageUrl ? (
+                                        <img
+                                            src={selectedDream.imageUrl}
+                                            alt={selectedDream.title}
+                                            className="w-full h-auto rounded-lg"
+                                        />
+                                    ) : (
+                                        <div className="flex items-center justify-center h-48 text-white/40 text-sm">
+                                            {t("historial.panel.panelEstadisticas.noImage")}
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+                            {active === "Stats" && (
+                                <div className="space-y-4">
+                                    <StatsCard
+                                        emotions={[
+                                            { name: "Alegría", value: 65 },
+                                            { name: "Tristeza", value: 32 },
+                                            { name: "Calma", value: 24 },
+                                        ]}
+                                        classes={["Normal", "Lúcido", "Pesadilla", "Simbólico"]}
+                                        typeProb={52}
+                                        entities={["Bosque", "Niño", "Escuela"]}
+                                    />
+                                </div>
+                            )}
+                        </>
                     )}
-                    {(active === "Imagen") && (
-                        <div className="text-sm text-zinc-400/90 py-2">
-                        </div>
-                    )}
-                    {(active === "Stats") && (
-                        <div className="space-y-4">
-                            <StatsCard
-                                emotions={[
-                                    { name: "Alegría", value: 65 },
-                                    { name: "Tristeza", value: 32 },
-                                    { name: "Calma", value: 24 },
-                                ]}
-                                classes={["Normal", "Lúcido", "Pesadilla", "Simbólico"]}
-                                typeProb={52}
-                                entities={["Bosque", "Niño", "Escuela"]}
-                            />
-                        </div>
-                    )}
-
                 </HudMenu.Body>
             </HudMenu.Container>
         </HudMenu.Root>

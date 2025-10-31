@@ -11,11 +11,15 @@ export type DreamAPIResponse = {
 
 export class DreamsService {
 
-    async fetchDreamInterpretation(description: string): Promise<DreamAPIResponse> {
+    async fetchDreamInterpretation(session: Session | null, description: string): Promise<DreamAPIResponse> {
+        if (!session?.access_token) {
+            throw new Error("No authentication token available");
+        }
         const response = await fetch('http://localhost:3000/api/dreams/interpret', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                Authorization: `Bearer ${session.access_token}`,
             },
             body: JSON.stringify({ description }),
         });

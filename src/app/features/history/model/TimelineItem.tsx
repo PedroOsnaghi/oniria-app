@@ -1,6 +1,8 @@
 export type TimelineItem = {
-  id: number;
+  id: string;
   date: string;
   title: string;
   active?: boolean;
+  interpretation?: string;
+  imageUrl?: string;
 };

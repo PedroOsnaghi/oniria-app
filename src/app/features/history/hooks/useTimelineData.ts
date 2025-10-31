@@ -23,7 +23,7 @@ export function useTimelineData() {
 
                 if (mounted && response.data) {
                     const mappedTimeline: TimelineItem[] = response.data.map((item) => ({
-                        id: Number(item.id),
+                        id: item.id,
                         date: item.creationDate,
                         title: item.title,
                         interpretation: item.interpretation,

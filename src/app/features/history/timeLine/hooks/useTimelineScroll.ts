@@ -1,8 +1,8 @@
 import { useEffect, type MutableRefObject, type RefObject } from "react";
 
 type UseTimelineScrollProps = {
-    selectedId?: number;
-    itemRefs: MutableRefObject<Map<number, HTMLLIElement>>;
+    selectedId?: string;
+    itemRefs: MutableRefObject<Map<string, HTMLLIElement>>;
     listRef: RefObject<HTMLUListElement | null>;
 };
 

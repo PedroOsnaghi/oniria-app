@@ -39,11 +39,11 @@ export default function Actions({
   const getSaveButtonText = () => {
     switch (saveState) {
       case "saving":
-        return "Guardando...";
+        return t("node.panelImage.guardando");
       case "saved":
-        return "Guardado";
+        return t("node.panelImage.guardado");
       default:
-        return "Guardar";
+        return t("node.guardar");
     }
   };
 
