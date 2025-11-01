@@ -158,5 +158,55 @@
   },
   "private_route": {
     "loading": "Cargando..."
+  },
+  "subscription": {
+    "loginToContinue": "Iniciá sesión para continuar",
+    "upgradeTitle": "Mejorá a Oniria Pro",
+    "upgradeSubtitle": "Desbloqueá la experiencia completa y traé tus sueños a la vida.",
+    "feature1Title": "Subidas ilimitadas de sueños",
+    "feature1Desc": "Compartí e interpretá todos los sueños que quieras.",
+    "feature2Title": "Análisis profundo con IA",
+    "feature2Desc": "Accedé a interpretaciones más detalladas y personalizadas.",
+    "feature3Title": "Objetos exclusivos para tu habitación",
+    "feature3Desc": "Decorá tu espacio en Oniria con elementos únicos.",
+    "feature4Title": "Acceso anticipado a funciones",
+    "feature4Desc": "Sé el primero en probar nuevas herramientas y experiencias.",
+    "feature5Title": "Reinterpretación de sueños ilimitadas",
+    "feature5Desc": "Reinterpretá tus sueños de manera ilimitada.",
+    "agreementText": "Al mejorar, aceptás nuestros",
+    "terms": "Términos",
+    "and": "y",
+    "privacy": "Política de privacidad",
+    "confirmPlan": "Confirmá tu plan",
+    "planName": "Plan Oniria Pro",
+    "planPrice": "$10.000 ARS",
+    "billingInfo": "Facturado mensualmente",
+    "planDescription": "Suscripción Oniria Pro"
+  },
+  "payment": {
+    "title": "Pago",
+    "cardNumber": "Número de tarjeta",
+    "cardholderName": "Nombre del titular",
+    "expiration": "Vencimiento",
+    "dni": "DNI (sin puntos ni guiones)",
+    "processing": "Procesando...",
+    "pay": "Pagar",
+    "status": {
+      "approved": {
+        "title": "Pago aprobado 🎉",
+        "message": "Tu membresía fue actualizada correctamente.",
+        "button": "Volver al inicio"
+      },
+      "in_process": {
+        "title": "Pago en proceso ⏳",
+        "message": "Estamos procesando tu pago, recibirás una confirmación pronto.",
+        "button": "Intentar de nuevo"
+      },
+      "rejected": {
+        "title": "Pago rechazado ❌",
+        "message": "Tu pago no pudo completarse. Inténtalo nuevamente.",
+        "button": "Intentar de nuevo"
+      }
+    }
   }
 }

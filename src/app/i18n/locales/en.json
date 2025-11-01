@@ -157,5 +157,55 @@
   },
   "private_route": {
     "loading": "Loading..."
+  },
+  "subscription": {
+    "loginToContinue": "Log in to continue",
+    "upgradeTitle": "Upgrade to Oniria Pro",
+    "upgradeSubtitle": "Unlock the full experience and bring your dreams to life.",
+    "feature1Title": "Unlimited dream uploads",
+    "feature1Desc": "Share and interpret as many dreams as you like.",
+    "feature2Title": "Deep AI Dream Analysis",
+    "feature2Desc": "Access deeper and more personalized interpretations.",
+    "feature3Title": "Exclusive Room Items",
+    "feature3Desc": "Decorate your Oniria space with unique unlockables.",
+    "feature4Title": "Early feature access",
+    "feature4Desc": "Be the first to try new dream tools and experiences.",
+    "feature5Title": "Unlimited dream reinterpretations",
+    "feature5Desc": "Reinterpret as many dreams as you like.",
+    "agreementText": "By upgrading, you agree to our",
+    "terms": "Terms",
+    "and": "and",
+    "privacy": "Privacy Policy",
+    "confirmPlan": "Confirm your plan",
+    "planName": "Oniria Pro Plan",
+    "planPrice": "$10,000 ARS",
+    "billingInfo": "Billed monthly",
+    "planDescription": "Oniria Pro Subscription"
+  },
+  "payment": {
+    "title": "Payment",
+    "cardNumber": "Card number",
+    "cardholderName": "Cardholder name",
+    "expiration": "Expiration date",
+    "dni": "ID number (no dots or dashes)",
+    "processing": "Processing...",
+    "pay": "Pay",
+    "status": {
+      "approved": {
+        "title": "Payment approved 🎉",
+        "message": "Your membership was successfully updated.",
+        "button": "Go to home"
+      },
+      "in_process": {
+        "title": "Payment in process ⏳",
+        "message": "We're processing your payment, you'll receive confirmation soon.",
+        "button": "Try again"
+      },
+      "rejected": {
+        "title": "Payment rejected ❌",
+        "message": "Your payment couldn't be completed. Please try again.",
+        "button": "Try again"
+      }
+    }
   }
 }
