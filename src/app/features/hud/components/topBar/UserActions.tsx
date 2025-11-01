@@ -2,8 +2,9 @@ import NotificationButton from "@/app/features/notifications/components/Notifica
 import MobileMenuButton from "@/app/features/hud/components/topBar/MobileMenuButton";
 import UserProfile from "@/app/features/profile/UserProfile";
 import { useAuth } from "../../../auth/hooks/useAuth";
-import UserLike from "../../../like/UserLike";
-import LanguageToggle from "../../../lang-toggle/LanguageToggle";
+import UserLike from "@/app/features/like/UserLike";
+import LanguageToggle from "@/app/features/lang-toggle/LanguageToggle";
+import Wallet from "@/app/features/balance/Balance";
 import { ThemeToggle } from "@/app/features/dark-mode";
 
 type UserActionsProps = {
@@ -33,6 +34,7 @@ export default function UserActions({
       <UserLike />
       <LanguageToggle />
       <NotificationButton onClick={onNotificationClick} />
+      <Wallet/>
       <UserProfile
         name={user?.user_metadata.full_name ?? "Invitado"}
         email={user?.email ?? ""}

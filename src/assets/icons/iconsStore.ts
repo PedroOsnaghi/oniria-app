@@ -28,7 +28,7 @@ import EyeOpenIcon from "./store/EyeOpenIcon";
 import EyeCloseIcon from "./store/EyeCloseIcon";
 import ArrowIcon from "./store/ArrowIcon";
 import MicIcon from "./store/MicIcon";
-
+import CoinsIcon from "./store/CoinsIcon";
 
 export type IconName =
     | "portal"
@@ -60,6 +60,7 @@ export type IconName =
     | "eye-close"
     | "arrow"
     | "mic"
+    | "coins"
     ;
 
 export type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
@@ -94,4 +95,5 @@ export const iconsStore: Record<IconName, IconComponent> = {
     "eye-close": EyeCloseIcon,
     arrow: ArrowIcon,
     mic: MicIcon,
+    coins: CoinsIcon,
 };
