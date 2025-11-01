@@ -7,8 +7,7 @@ interface BalanceProps {
 }
 
 export default function Balance({ className = "", balance = 0 }: BalanceProps) {
-    const { i18n } = useTranslation();
-    const isEs = (i18n.language || "").toLowerCase().startsWith("es");
+    const { t, i18n } = useTranslation();
 
     const formattedBalance = balance.toLocaleString(i18n.language, {
         minimumFractionDigits: 0,
@@ -18,11 +17,10 @@ export default function Balance({ className = "", balance = 0 }: BalanceProps) {
     return (
         <div
             role="button"
-            title={isEs ? "Saldo" : "Balance"}
-            aria-label={isEs ? "Ver saldo" : "View balance"}
+            title={t("home.balance")}
             className={`hidden h-full md:flex bg-gray-700/45 hover:bg-[var(--user-hover-bg)] items-center justify-center gap-2 rounded-full px-3 py-1.5 border border-[var(--user-border)] hover:border-[var(--user-hover-border)] transition-all duration-200 ease-out cursor-pointer backdrop-blur-2xl ${className}`}
             style={{
-                minWidth: "90px",
+                minWidth: "80px",
             }}
         >
             {/* Ícono */}
@@ -36,7 +34,7 @@ export default function Balance({ className = "", balance = 0 }: BalanceProps) {
                     className="text-md font-bold transition-colors duration-200"
                     style={{ color: "var(--user-text-primary)" }}
                 >
-                    {formattedBalance} 
+                    {formattedBalance}
                 </div>
             </div>
         </div>

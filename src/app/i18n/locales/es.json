@@ -3,7 +3,8 @@
     "link": "Inicio",
     "title": "Bienvenido a Oniria",
     "description": "Explorá el mundo de los sueños con Oniria.",
-    "likeApp": "¿Te gusta la app?"
+    "likeApp": "¿Te gusta la app?",
+    "balance": "Ver mi saldo"
   },
   "login": {
     "link": "Iniciá sesión",

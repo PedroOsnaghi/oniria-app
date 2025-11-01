@@ -3,7 +3,8 @@
     "link": "Home",
     "title": "Welcome to Oniria",
     "description": "Explore the world of dreams with Oniria.",
-    "likeApp": "Do you like the app?"
+    "likeApp": "Do you like the app?",
+    "balance": "View my balance"
   },
   "login": {
     "link": "Log In",
