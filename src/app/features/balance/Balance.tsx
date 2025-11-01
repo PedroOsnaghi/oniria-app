@@ -20,7 +20,7 @@ export default function Balance({ className = "", balance = 0 }: BalanceProps) {
             title={t("home.balance")}
             className={`hidden h-full md:flex bg-gray-700/45 hover:bg-[var(--user-hover-bg)] items-center justify-center gap-2 rounded-full px-3 py-1.5 border border-[var(--user-border)] hover:border-[var(--user-hover-border)] transition-all duration-200 ease-out cursor-pointer backdrop-blur-2xl ${className}`}
             style={{
-                minWidth: "80px",
+                minWidth: "60px",
             }}
         >
             {/* Ícono */}
