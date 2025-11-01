@@ -29,7 +29,7 @@ export default function UserLike() {
       className="hidden h-full md:flex bg-gray-700/45 items-center justify-center gap-2 rounded-full px-3 py-1.5 border transition-all duration-200 ease-out cursor-pointer"
       style={{
         borderColor: "var(--user-border)",
-        minWidth: "200px", // Ancho fijo para "Do you like the app?"
+        minWidth: "180px", // Ancho fijo para "Do you like the app?"
       }}
     >
       <p className="text-sm text-nowrap">{t("home.likeApp")}</p>

@@ -33,7 +33,7 @@ export default function UserActions({
       <ThemeToggle />
       <UserLike />
       <LanguageToggle />
-      <NotificationButton onClick={onNotificationClick} />
+      {/* <NotificationButton onClick={onNotificationClick} /> */}
       <Wallet/>
       <UserProfile
         name={user?.user_metadata.full_name ?? "Invitado"}
