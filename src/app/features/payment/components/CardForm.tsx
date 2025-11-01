@@ -11,7 +11,7 @@ interface CardFormProps {
   description: string;
   type: "membership" | "coins";
   session: Session;
-  onSuccess: (data: any) => void;
+  onSuccess: (_data: any) => void;
 }
 
 export default function CardForm({
@@ -27,16 +27,20 @@ export default function CardForm({
   const [paymentMethodId, setPaymentMethodId] = useState<string>("");
   const [cardNumber, setCardNumber] = useState("");
   const [cardLogo, setCardLogo] = useState<string | null>(null);
-  const [paymentStatus, setPaymentStatus] = useState<"approved" | "in_process" | "rejected" | null>(null);
+  const [paymentStatus, setPaymentStatus] = useState<
+    "approved" | "in_process" | "rejected" | null
+  >(null);
   const navigate = useNavigate();
 
   const publicKey = import.meta.env.VITE_MERCADOPAGO_PUBLIC_KEY!;
   const payerEmail = session.user.email!;
 
   useEffect(() => {
-    init(publicKey).then(setMp);
-  }, []);
-
+    if (!mp) {
+      init(publicKey).then(setMp);
+    }
+  }, [init, publicKey, mp]);
+  
   async function handleCardNumberChange(value: string) {
     const cleanValue = value.replace(/\D/g, "");
     const formatted = cleanValue.match(/.{1,4}/g)?.join(" ") || cleanValue;
@@ -101,7 +105,8 @@ export default function CardForm({
       if (data) {
         onSuccess(data);
         if (data.message?.includes("aprobado")) setPaymentStatus("approved");
-        else if (data.message?.includes("proceso")) setPaymentStatus("in_process");
+        else if (data.message?.includes("proceso"))
+          setPaymentStatus("in_process");
         else setPaymentStatus("rejected");
       }
     } catch (err: any) {
@@ -115,12 +120,19 @@ export default function CardForm({
     <div className="relative w-full max-w-full overflow-hidden">
       <div
         className={`w-full transition-all duration-500 ${
-          paymentStatus ? "translate-x-[-100%] opacity-0" : "translate-x-0 opacity-100"
+          paymentStatus
+            ? "translate-x-[-100%] opacity-0"
+            : "translate-x-0 opacity-100"
         }`}
       >
-        <form onSubmit={handleSubmit} className="flex flex-col gap-5 m-1 min-w-30">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-5 m-1 min-w-30"
+        >
           <div className="flex flex-col gap-1">
-            <label className="text-sm text-gray-400">{t("payment.cardNumber")}</label>
+            <label className="text-sm text-gray-400">
+              {t("payment.cardNumber")}
+            </label>
             <div className="relative">
               <input
                 title="cardNumber"
@@ -143,7 +155,9 @@ export default function CardForm({
           </div>
 
           <div className="flex flex-col gap-1">
-            <label className="text-sm text-gray-400">{t("payment.cardholderName")}</label>
+            <label className="text-sm text-gray-400">
+              {t("payment.cardholderName")}
+            </label>
             <input
               title="cardholderName"
               name="cardholderName"
@@ -155,7 +169,9 @@ export default function CardForm({
 
           <div className="flex gap-2">
             <div className="flex flex-col gap-1 w-2/3">
-              <label className="text-sm text-gray-400">{t("payment.expiration")}</label>
+              <label className="text-sm text-gray-400">
+                {t("payment.expiration")}
+              </label>
               <div className="flex items-center bg-gray-800 rounded-lg px-2 focus-within:ring-2 focus-within:ring-fuchsia-500">
                 <input
                   title="expirationMonth"
@@ -206,10 +222,7 @@ export default function CardForm({
             />
           </div>
 
-          <ModalButton
-            type="submit"
-            disabled={loading || !paymentMethodId}
-          >
+          <ModalButton type="submit" disabled={loading || !paymentMethodId}>
             {loading ? t("payment.processing") : t("payment.pay")}
           </ModalButton>
         </form>
@@ -217,7 +230,9 @@ export default function CardForm({
 
       <div
         className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${
-          paymentStatus ? "translate-x-0 opacity-100" : "translate-x-[100%] opacity-0"
+          paymentStatus
+            ? "translate-x-0 opacity-100"
+            : "translate-x-[100%] opacity-0"
         }`}
       >
         {paymentStatus && (

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { loadMercadoPago } from "@mercadopago/sdk-js";
 import type { Session } from "@supabase/supabase-js";
 import supabase from "@/app/utils/supabase";
@@ -24,11 +24,12 @@ export function useMercadoPago() {
     supabase.auth.getSession().then(({ data }) => setSession(data.session));
   }, []);
 
-  async function init(publicKey: string) {
+   const init = useCallback(async (publicKey: string) => {
     await loadMercadoPago();
     const MP = (window as any).MercadoPago;
     return new MP(publicKey, { locale: "es-AR" });
-  }
+  }, []);
+
 
   async function processPayment({
     cardToken,
