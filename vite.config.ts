@@ -8,6 +8,9 @@ import path from 'path'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss(), glsl()],
+  server: {
+    allowedHosts: ['kaysen-untimed-ambrosially.ngrok-free.dev'],
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
