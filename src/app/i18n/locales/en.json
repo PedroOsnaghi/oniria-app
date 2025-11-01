@@ -2,14 +2,14 @@
   "home": {
     "link": "Home",
     "title": "Welcome to Oniria",
-    "description": "Explore the world of dreams with Oniria.",
+    "description": "Explore the world of dreams with Oniria",
     "likeApp": "Do you like the app?",
     "balance": "View my balance"
   },
   "login": {
     "link": "Log In",
-    "subtitle": "We're glad to see you here! Welcome.",
-    "subtitle2": "Log in to continue.",
+    "subtitle": "We're glad to see you here! Welcome",
+    "subtitle2": "Log in to continue",
     "email": "Email",
     "password": "Password",
     "button": "Log In",
@@ -28,7 +28,7 @@
   "register": {
     "link": "Sign Up",
     "subtitle": "Create your account easily and quickly",
-    "subtitle2": "Join the Oniria community.",
+    "subtitle2": "Join the Oniria community",
     "username": "Username",
     "email": "Email",
     "password": "Password",
@@ -38,10 +38,10 @@
     "errorPasswordMatch": "Passwords do not match",
     "text": "Already have an account?",
     "textLink": "Log In",
-    "success": "Account created successfully. Please check your email to confirm your account.",
+    "success": "Account created successfully. Please check your email to confirm your account",
     "error": "Error creating account",
     "successTitle": "Thanks for signing up!",
-    "successMessage": "You're now part of our community! Now just check your email inbox to verify your account.",
+    "successMessage": "You're now part of our community! Now just check your email inbox to verify your account",
     "goToLogin": "Log In"
   },
   "notFound": {
@@ -52,7 +52,7 @@
     "link": "History",
     "verSuenos": "See your saved dreams",
     "title": "Explore your Nodes",
-    "description": "Select the node you want to explore in your dream history.",
+    "description": "Select the node you want to explore in your dream history",
     "oniriaPro": "Try Oniria PRO",
     "visibility": "Visibility",
     "public": "Public",
@@ -63,7 +63,7 @@
     "salir": "Exit",
     "panel": {
       "titlePanel": "DREAM HISTORY",
-      "description": "Here you can explore all your past dreams and their interpretations. Each node represents a journey into your subconscious, connected with unique symbols and emotions from your dream history.",
+      "description": "Explore all your past dreams and their interpretations. Each node represents a journey into your subconscious, connected with unique symbols and emotions from your dream history.",
       "panelEstadisticas": {
         "tabEstadisticas": "Statistics",
         "tabInterpretacion": "Interpretation",
@@ -90,7 +90,7 @@
     "personalizar": "Customize",
     "toque": "Add your touch to the space",
     "insignia": "My badges",
-    "descriptionInsignia": "Manage your achievements within Oniria.",
+    "descriptionInsignia": "Manage your achievements within Oniria",
     "suenoDelNodo": "Node's dream",
     "cerrar": "Close",
     "guardar": "Save",
@@ -105,19 +105,19 @@
     "menu": {
       "portal": "The Portal",
       "labelPortal": "What did you dream?",
-      "descriptionPortal": "Here you can record your dreams, explore your history, and discover the patterns that inhabit your mind.",
+      "descriptionPortal": "Rrecord your dreams, explore your history, and discover the patterns that inhabit your mind",
       "descriptPortalPanel": "The Dream Portal is the gateway to your inner universe. From here you can record a dream, interpret it, or explore your dream history. Each choice opens a new path within your mind.",
-      "oniriaAiFunction": "Oniria AI will give you a symbolic interpretation of your dream.",
+      "oniriaAiFunction": "Oniria AI will give you a symbolic interpretation of your dream",
       "historialLabel": "My Dream History",
-      "historialDescription": "Access your dream journal and explore past interpretations.",
+      "historialDescription": "Access your dream journal and explore past interpretations",
       "monitor": {
         "title": "Control Center",
-        "description": "Adjust application preferences and customize your experience.",
+        "description": "Adjust application preferences and customize your experience",
         "items": {
           "labelPerfil": "Profile",
-          "descPerfil": "Manage your profile and personal preferences.",
+          "descPerfil": "Manage your profile and personal preferences",
           "labelNotificaciones": "Notifications",
-          "descNotificaciones": "Set your notification preferences.",
+          "descNotificaciones": "Set your notification preferences",
           "labelPersonalizacion": "Customization",
           "descPersonalizacion": "Customize your room."
         }
@@ -126,7 +126,7 @@
     "portal": {
       "saludo": "Hello ",
       "saludoDos": " What images remained in your dream?",
-      "description": "Write freely, without worrying about the order. Oniria will take care of interpreting it.",
+      "description": "Write freely, without worrying about the order. Oniria will take care of interpreting it",
       "placeholder": "Today I dreamed...",
       "descriptionPanel": "You are in the Dream Journal, the place where your dreams take shape. Every word you write leaves a mark on your inner map, connecting memories, symbols, and emotions. This is your space to record what the subconscious showed you while you slept.",
       "tassSeguro": "Are you sure you want to close without saving the interpretation?",
@@ -140,9 +140,9 @@
       "imagenLista": "Your image is ready!",
       "generandoImagen": "Generating image...",
       "interpretacionGuardada": "Interpretation saved!",
-      "imagenTransform": "Your interpretation has been transformed into a unique image.",
+      "imagenTransform": "Your interpretation has been transformed into a unique image",
       "imagenVisual": "We are creating a visual image of your dream. This may take a moment...",
-      "tranformacionUnica": "Your interpretation has been transformed into a unique visual experience.",
+      "tranformacionUnica": "Your interpretation has been transformed into a unique visual experience",
       "generarImagen": "Generate image",
       "generando": "Generating...",
       "download": "Download image",
@@ -153,8 +153,8 @@
   "header": {
     "loading": "Loading...",
     "guest": "Guest",
-    "closeSesion": "Close session",
-    "closingSesion": "Closing session..."
+    "closeSesion": "Log out",
+    "closingSesion": "Loggin out..."
   },
   "private_route": {
     "loading": "Loading..."

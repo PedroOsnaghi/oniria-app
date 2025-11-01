@@ -2,14 +2,14 @@
   "home": {
     "link": "Inicio",
     "title": "Bienvenido a Oniria",
-    "description": "Explorá el mundo de los sueños con Oniria.",
+    "description": "Explorá el mundo de los sueños con Oniria",
     "likeApp": "¿Te gusta la app?",
     "balance": "Ver mi saldo"
   },
   "login": {
     "link": "Iniciá sesión",
-    "subtitle": "¡Qué gusto que estés acá! Te damos la bienvenida.",
-    "subtitle2": "Iniciá sesión para continuar.",
+    "subtitle": "¡Qué gusto que estés acá! Te damos la bienvenida",
+    "subtitle2": "Iniciá sesión para continuar",
     "email": "Correo electrónico",
     "password": "Contraseña",
     "button": "Ingresar",
@@ -28,7 +28,7 @@
   "register": {
     "link": "Registrate",
     "subtitle": "Creá tu cuenta fácil y rápido",
-    "subtitle2": "Unite a la comunidad de Oniria.",
+    "subtitle2": "Unite a la comunidad de Oniria",
     "username": "Nombre de usuario",
     "email": "Correo electrónico",
     "password": "Contraseña",
@@ -39,9 +39,9 @@
     "text": "¿Ya tenés una cuenta?",
     "textLink": "Iniciá sesión",
     "error": "Error al registrarse",
-    "success": "Registro exitoso. Revisá tu email para verificar la cuenta.",
+    "success": "Registro exitoso. Revisá tu email para verificar tu cuenta",
     "successTitle": "¡Gracias por registrarte!",
-    "successMessage": "¡Ya sos parte de nuestra comunidad! Ahora solo revisá tu casilla de email para verificar la cuenta.",
+    "successMessage": "¡Ya sos parte de nuestra comunidad! Ahora solo revisá tu casilla de email para verificar tu cuenta",
     "goToLogin": "Iniciar sesión"
   },
   "notFound": {
@@ -52,7 +52,7 @@
     "link": "Historial",
     "verSuenos": "Ver tus sueños guardados",
     "title": "Explorá tus Nodos",
-    "description": "Seleccioná el nodo que deseas explorar en tu historia onírica.",
+    "description": "Seleccioná el nodo que deseas explorar en tu historia onírica",
     "oniriaPro": "Probá Oniria PRO",
     "visibility": "Visibilidad",
     "public": "Público",
@@ -63,7 +63,7 @@
     "salir": "Salir",
     "panel": {
       "titlePanel": "HISTORIA ONÍRICA",
-      "description": "Acá podés explorar todos tus sueños pasados y sus interpretaciones. Cada nodo representa un viaje a tu subconsciente, conectado con símbolos y emociones únicas de tu historia onírica.",
+      "description": "Explorá todos tus sueños pasados y sus interpretaciones. Cada nodo representa un viaje a tu subconsciente, conectado con símbolos y emociones únicas de tu historia onírica.",
       "panelEstadisticas": {
         "tabEstadisticas": "Estadísticas",
         "tabInterpretacion": "Interpretación",
@@ -81,17 +81,17 @@
   },
   "node": {
     "bitacora": "BITÁCORA",
-    "descriptionLabel": "Descubrí el significado de tus sueños con nuestra IA.",
+    "descriptionLabel": "Descubrí el significado de tus sueños con nuestra IA",
     "placeholderNode": "Hoy soñé...",
     "character1": "Te pasaste del máximo de ",
     "character2": "caracteres",
     "interpretar": "Interpretar",
     "myroom": "Mi habitación",
-    "myroomDesc": "Gestioná tu espacio.",
+    "myroomDesc": "Gestioná tu espacio",
     "personalizar": "Personalizar",
     "toque": "Dale tu toque al espacio",
     "insignia": "Mis insignias",
-    "descriptionInsignia": "Gestioná tus logros dentro de Oniria.",
+    "descriptionInsignia": "Gestioná tus logros dentro de Oniria",
     "suenoDelNodo": "Sueño del nodo",
     "cerrar": "Cerrar",
     "guardar": "Guardar",
@@ -106,28 +106,28 @@
     "menu": {
       "portal": "El Portal",
       "labelPortal": "¿Qué soñaste?",
-      "descriptionPortal": "Acá podés registrar tus sueños, explorar tu historial y descubrir los patrones que habitan en tu mente.",
-      "descriptPortalPanel": "El Portal de los Sueños es el punto de acceso a tu universo interior. Desde aquí podés registrar un sueño, interpretarlo o explorar tu historia onírica. Cada elección abre un nuevo camino dentro de tu mente.",
-      "oniriaAiFunction": "Oniria AI te dará una interpretación simbólica de tu sueño.",
+      "descriptionPortal": "Registrá tus sueños, explorá tu historial y descubrí los patrones que habitan en tu mente",
+      "descriptPortalPanel": "El Portal de los Sueños es el punto de acceso a tu universo interior. Desde acá podés registrar un sueño, interpretarlo o explorar tu historia onírica. Cada elección abre un nuevo camino dentro de tu mente.",
+      "oniriaAiFunction": "Oniria AI te dará una interpretación simbólica de tu sueño",
       "historialLabel": "Mi historia onírica",
-      "historialDescription": "Accedé a tu diario de sueños y explorá las interpretaciones pasadas.",
+      "historialDescription": "Accedé a tu diario de sueños y explorá las interpretaciones pasadas",
       "monitor": {
         "title": "Centro de control",
-        "description": "Ajustá las preferencias de la aplicación y personalizá tu experiencia.",
+        "description": "Ajustá las preferencias de la aplicación y personalizá tu experiencia",
         "items": {
           "labelPerfil": "Perfil",
-          "descPerfil": "Gestioná tu perfil y preferencias personales.",
+          "descPerfil": "Gestioná tu perfil y preferencias personales",
           "labelNotificaciones": "Notificaciones",
-          "descNotificaciones": "Configurá tus preferencias de notificación.",
+          "descNotificaciones": "Configurá tus preferencias de notificación",
           "labelPersonalizacion": "Personalización",
-          "descPersonalizacion": "Personalizá tu habitación."
+          "descPersonalizacion": "Personalizá tu habitación"
         }
       }
     },
     "portal": {
       "saludo": "Hola ",
       "saludoDos": " ¿Qué imágenes quedaron en tu sueño?",
-      "description": "Escribí libremente, sin preocuparte por el orden. Oniria se encargará de interpretarlo.",
+      "description": "Escribí libremente, sin preocuparte por el orden. Oniria se encargará de interpretarlo",
       "placeholder": "Hoy soñé...",
       "descriptionPanel": "Estás en la Bitácora Onírica, el lugar donde tus sueños toman forma. Cada palabra que escribas deja una huella en tu mapa interior, conectando recuerdos, símbolos y emociones. Este es tu espacio para registrar lo que el subconsciente te mostró mientras dormías.",
       "tassSeguro": "¿Estás seguro de cerrar sin guardar la interpretación?",
@@ -141,9 +141,9 @@
       "imagenLista": "¡Tu imagen ya está lista!",
       "generandoImagen": "Generando imagen...",
       "interpretacionGuardada": "¡Interpretación guardada!",
-      "imagenTransform": "Tu interpretación ha sido transformada en una imagen única.",
+      "imagenTransform": "Tu interpretación ha sido transformada en una imagen única",
       "imagenVisual": "Estamos creando una imagen visual de tu sueño. Esto puede tomar unos momentos...",
-      "tranformacionUnica": "Tu interpretación ha sido transformada en una experiencia visual única.",
+      "tranformacionUnica": "Tu interpretación ha sido transformada en una experiencia visual única",
       "generarImagen": "Generar imagen",
       "generando": "Generando...",
       "download": "Descargar imagen",
